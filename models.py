@@ -29,6 +29,7 @@ class administrator(models.Model):
      email=models.CharField()
      phone=models.CharField(max_length=15)
      role=models.CharField(200)
+     
 
      
 
