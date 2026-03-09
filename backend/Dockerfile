@@ -8,15 +8,29 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /app
 
-# Install dependencies
+# Install system dependencies (if any are needed for your specific packages)
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     gcc \
+#     && rm -rf /var/lib/apt/lists/*
+
+# Install python dependencies
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY . /app/
+
+# Collect static files
+# We set a dummy SECRET_KEY here just for the build process
+RUN SECRET_KEY=build-secret-key python manage.py collectstatic --noinput
+
+# Create a non-root user and switch to it
+RUN useradd -m django && chown -R django:django /app
+USER django
 
 # Expose port
 EXPOSE 8000
 
 # Run gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+
