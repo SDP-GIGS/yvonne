@@ -90,7 +90,7 @@ class internshipreport_model(models.Model):
        
      
 class  WeeklyLog(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user  = models.ForeignKey(User, on_delete=models.CASCADE)
     internship=models.ForeignKey(internship,null=True,on_delete=models.SET_NULL)
     week_start = models.DateField()
     week_number=models.CharField()
