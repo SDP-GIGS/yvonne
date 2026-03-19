@@ -5,6 +5,11 @@ function App() {
   const [hover, setHover] = useState(false);
 
   return (
+<<<<<<< HEAD
+    <div className="App">
+      <h1>{ message }</h1>
+    </div>
+=======
     <>
       {/* HEADER */}
       <header
@@ -118,6 +123,7 @@ function App() {
         <p>&copy; 2026 ILES System. All rights reserved.</p>
       </footer>
     </>
+>>>>>>> 7f5420a7bb6885dc5a960b899d109ea8eb86b954
   );
 }
 
