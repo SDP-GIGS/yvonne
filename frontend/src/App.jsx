@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
-import API from "./api";
-
-export default function App() {
-  const [message, setMessage] = useState("Loading...");
-
-  useEffect(() => {
-    API.get("/api/hello/")
-      .then((res) => setMessage(res.data))
-      .catch((err) => setMessage(`Error: ${err.message}`));
-  }, []);
-
+function App() {
   return (
+
     <div className="App">
-      <h1>{message}</h1>
+      <h1>Internship Logging and Evaluation System</h1>
+      <p>Welcome to your system dashboard!</p>
+
     </div>
   );
 }
+export default App;
