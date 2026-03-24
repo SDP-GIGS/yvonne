@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import YourModelListCreate
+from .views import StudentListCreate
 
 urlpatterns = [
-    path('api/items/', YourModelListCreate.as_view(), name='item-list-create'),
+    path('api/students/', StudentListCreate.as_view(), name='student-list-create'),
 ]
