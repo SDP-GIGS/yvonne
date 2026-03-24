@@ -1,7 +1,7 @@
 // src/App.jsx
 import { useState } from "react";
-//before editing the code please tell where u have exactly
-//verey important 
+//before editing the code please tell where you have exactly
+//very important 
 function App() {
   const [hover, setHover] = useState(false);
 
