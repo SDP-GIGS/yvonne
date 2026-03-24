@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Students
-from .serializers import StudentsSerializer
+from .models import students
+from .serializers import studentsSerializer
 
-class StudentListCreate(generics.ListCreateAPIView):
-    queryset = Students.objects.all()
-    serializer_class = StudentsSerializer
+class studentListCreate(generics.ListCreateAPIView):
+    queryset = students.objects.all()
+    serializer_class = studentsSerializer
 
 # Create your views here.

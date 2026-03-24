@@ -23,7 +23,7 @@ class academic_supervisor(models.Model):
      department=models.CharField(max_length=50)
      office_location=models.CharField(max_length=100)
      specialization= models.CharField()
-     student=models.ForeignKey(Students, null=True,on_delete=models.SET_NULL)
+     student=models.ForeignKey(students, null=True,on_delete=models.SET_NULL)
 
 class workplace_supervisor(models.Model):
       name=models.CharField(max_length=100)
@@ -62,7 +62,7 @@ class internship(models.Model):
 
 class appplication_model(models.Model):
     id=models.AutoField(primary_key=True)
-    student=models.ForeignKey(Students,null=True,on_delete=models.SET_NULL)
+    student=models.ForeignKey(students,null=True,on_delete=models.SET_NULL)
     internship=models.ForeignKey(internship, on_delete=models.CASCADE)
     cover_letter=models.TextField()
     status_choices=[
@@ -77,7 +77,7 @@ class appplication_model(models.Model):
    
 class internshipreport_model(models.Model):
     id=models.AutoField(primary_key=True)
-    student=models.ForeignKey(Students,on_delete=models.CASCADE)
+    student=models.ForeignKey(students,on_delete=models.CASCADE)
     internship=models.ForeignKey(internship,on_delete=models.CASCADE)
     report_file=models.FileField()
     submission_date=models.DateTimeField(auto_now_add=True)
