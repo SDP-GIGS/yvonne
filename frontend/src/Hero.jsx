@@ -1,6 +1,8 @@
+import React from "react";
 import { useState } from "react";
- const [hover, setHover] = useState(false);
+ 
 function Hero() {
+  const [hover, setHover] = useState(false);
   return (
 
  <section
