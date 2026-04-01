@@ -45,4 +45,5 @@
       </section>
   );
 }
+
 export default Features;

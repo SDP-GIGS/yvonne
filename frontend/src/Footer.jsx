@@ -8,6 +8,7 @@ function Footer() {
           textAlign: "center",
           borderTop: "1px solid #1f2937"
         }}
+        
       >
         <p>&copy; 2026 ILES System. All rights reserved.</p>
       </footer>
