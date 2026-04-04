@@ -25,4 +25,5 @@ class academic_supervisor(models.Model):
      specialization= models.CharField()
      student=models.ForeignKey(Students, null=True,on_delete=models.SET_NULL)
 
+
 # Create your models here.
