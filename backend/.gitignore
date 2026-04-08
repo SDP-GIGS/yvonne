@@ -1,2 +1,7 @@
 __pycache__/
+<<<<<<< HEAD
 *.pyc
+=======
+*.pyc
+venv/
+>>>>>>> f37fca91a126fb2c51ca56329c50da4c9bfc97d7
