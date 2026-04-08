@@ -23,6 +23,7 @@ class review(models.Model):
     score=models.DecimalField(max_digits=5,decimal_places=2)
     feedback=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
+    
 
 
 def __string__(self):
