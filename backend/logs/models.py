@@ -1,40 +1,41 @@
 from django.db import models
-from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.utils import timezone
-from datetime import timedelta
-class Weeklylog(models.Model):
-    Student=models.ForeignKey( settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE,
-        limit_choices_to={"role":"STUDENT"},
-        related_name="Weeklylog"
-    )   
-    Week_number=models.PositiveIntegerField()
-    objectives=models.TextField()
-    
-#this make a log for a student one per week
-class Meta:
-    unique_together=("student","Week_number")     
-    ordering=["-Week-number"]  
+from django.conf import settings 
 
-def clean(self):
-    """" Custom Validation for role and deadlines"""
-    if self.Student.role != "STUDENT":
-        raise ValidationError('Only students can submit the weekly logs')
+class WeeklyLog(models.Model):
+    class Status(models.TextChoices):
+        DRAFT = 'DRAFT', 'Draft'
+        SUBMITTED = 'SUBMITTED', 'Submitted'
+        REVIEWED ='REVIEWED', 'Reveiwed'
+        APPROVED = 'APPROVED', 'Approved'
 
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete =models.CASCADE,
+        related_name ='logs'
+    ) 
 
-    #put fixed deadlines every week
-    now=timezone.now()  
-    if self.created_at and self.created_at > (timezone.now() + timedelta(days= 7 )):
-      raise ValidationError("The submission deadline for this week has already passed.")
+    week_number = models.PositiveIntegerField()
+    start_date = models.DateField() 
+    end_date =models.DateField()
 
+    activities_performed = models.TextField(blank =True , null = True)
+    lessons_learned = models.TextField(blank =True ,null= True)
+    challenges_faced = models.TextField(blank =True, null =True)
 
-def save(self, *args,**kwargs):
-    self.fuul_clean()
-    super().save(*args, **kwargs)
+    status = models.CharField(
+        max_length =20,
+        choices =Status.choices,
+        default =Status.DRAFT
+    )  
 
+    created_at = models.DateTimeField(auto_now_add =True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = ['student', 'week_number']
 
-def __str__(self):
-    return f"Week {self.Week_number} -{self.Student.username}"
+    def __str__(self):
+        return f"Week {self.week_number} - {self.student.username}"      
+
+                                    
 # Create your models here.
