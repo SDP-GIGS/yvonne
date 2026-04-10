@@ -14,5 +14,6 @@ function Footer() {
         <p>&copy; 2026 ILES System. All rights reserved.</p>
       </footer>
   );
+  
 }
 export default Footer;
