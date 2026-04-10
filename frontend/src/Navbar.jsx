@@ -13,6 +13,7 @@ function Navbar() {
           boxShadow: "0 2px 6px rgba(0,0,0,0.5)"
         }}
       >
+        
         <h1 style={{ marginBottom: "10px" }}>InSync ILES System</h1>
         <nav>
           <a href="#home" style={{ margin: "0 15px", color: "#60a5fa", textDecoration: "none" }}>Home</a>

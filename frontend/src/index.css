@@ -5,7 +5,6 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-/* center and constrain the app */
 #root {
   min-height: 100vh;
   width: 100%;
@@ -17,7 +16,7 @@ body {
   border-inline: 1px solid #e5e4e7;
 }
 
-/* Headings */
+
 h1, h2 {
   font-weight: 500;
   color: #f9fafb;
@@ -32,7 +31,7 @@ h2 {
   font-size: 24px;
 }
 
-/* Paragraph */
+
 p {
   margin: 0;
 }
