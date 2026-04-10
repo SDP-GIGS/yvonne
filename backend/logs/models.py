@@ -13,6 +13,9 @@ class WeeklyLog(models.Model):
         on_delete =models.CASCADE,
         related_name ='logs'
     ) 
+    
+    
+    
 
     week_number = models.PositiveIntegerField()
     start_date = models.DateField() 
