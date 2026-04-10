@@ -36,7 +36,6 @@ function Hero() {
         >
           Get Started now
         </button>
-        
       </section>
   );
 }
