@@ -6,6 +6,7 @@ class InternshipPlacementSerializer(serializers.ModelSerializer):
     student = serializers.StringRelatedField(read_only=True)
     academic_supervisor = serializers.StringRelatedField(read_only=True)
     workplace_supervisor = serializers.StringRelatedField(read_only=True)
+    
 
     class Meta:
         model = InternshipPlacement
