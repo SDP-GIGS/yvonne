@@ -15,7 +15,6 @@ class WeeklyLog(models.Model):
     ) 
     
     
-    
 
     week_number = models.PositiveIntegerField()
     start_date = models.DateField() 
