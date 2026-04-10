@@ -12,4 +12,5 @@ class InternshipPlacement(models.Model):
         return f"{self.student.username} at {self.company_name}"
 
 
+
 # Create your models here.
