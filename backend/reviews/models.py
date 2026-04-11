@@ -10,6 +10,7 @@ class SupervisorReview(models.Model):
         on_delete=models.CASCADE, 
         related_name='review'
     )
+
     
     # The supervisor performing the review
     supervisor = models.ForeignKey(
