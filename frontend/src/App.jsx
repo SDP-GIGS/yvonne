@@ -6,12 +6,10 @@ import Footer from "./Footer";
 function App() {
   return (
     <>
-    
     <Navbar/>
     <Hero/>
     <Features/>
     <Footer/>
-
     </>
   );
 }
