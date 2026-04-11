@@ -6,3 +6,4 @@ class SupervisorReviewSerializer(serializers.ModelSerializer):
         model = SupervisorReview
         fields = ['id', 'weekly_log', 'supervisor', 'comments', 'technical_score', 'professionalism_score', 'date_reviewed']
         read_only_fields = ['supervisor', 'date_reviewed']
+        
