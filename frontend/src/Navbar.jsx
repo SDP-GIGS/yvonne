@@ -14,6 +14,7 @@ function Navbar() {
         }}
       >
         
+        
         <h1 style={{ marginBottom: "10px" }}>InSync ILES System</h1>
         <nav>
           <a href="#home" style={{ margin: "0 15px", color: "#60a5fa", textDecoration: "none" }}>Home</a>
