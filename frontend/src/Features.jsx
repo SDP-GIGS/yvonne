@@ -25,8 +25,7 @@ function Features() {
           key={feature.title}
           title={feature.title}
           text={feature.text}
-        />
-        
+        />  
       ))}
     </section>
   );
