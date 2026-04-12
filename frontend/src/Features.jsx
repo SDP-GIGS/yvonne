@@ -4,7 +4,7 @@ function Features() {
   const features = [
     { title: "Logging", text: "Keep track of all intern activities efficiently." },
     { title: "Evaluation", text: "Rate performance with detailed evaluation metrics." },
-    { title: "Reports", text: "Generate insightful reports for supervisors and interns." }
+    { title: "Reports", text: "Generate insightful reports for both supervisors and interns." }
   ];
 
   return (
