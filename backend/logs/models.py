@@ -17,7 +17,6 @@ class WeeklyLog(models.Model):
     start_date = models.DateField() 
     end_date =models.DateField()
     
-
     activities_performed = models.TextField(blank =True , null = True)
     lessons_learned = models.TextField(blank =True ,null= True)
     challenges_faced = models.TextField(blank =True, null =True)
