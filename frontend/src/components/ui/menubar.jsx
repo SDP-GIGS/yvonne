@@ -68,6 +68,7 @@ const Menubar = () => {
                 </div>
             </div>
 
+            
             {/* Mobile Menu Content */}
             {isOpen && (
                 <div className="sm:hidden bg-white border-t border-gray-200">
