@@ -16,7 +16,6 @@ const useFetch = (url) => {
         setError(err.message ||'An error occurred');
       } finally {
         setLoading(false);
-        
       }
     };
 
