@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .models import WeeklyReview
+from .models import SupervisorReview
 from .serializers import SupervisorReviewSerializer
 
 class WeeklyReviewViewSet(viewsets.ModelViewSet):
-    queryset = WeeklyReview.objects.all()
+    queryset = SupervisorReview.objects.all()
     serializer_class = SupervisorReviewSerializer
     permission_classes = [IsAuthenticated]
 
