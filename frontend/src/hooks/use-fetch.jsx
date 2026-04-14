@@ -19,8 +19,10 @@ const useFetch = (url) => {
       }
     };
 
-    fetchData();
-  }, [url]);  //It re-runs if the URL changes
+    if (url) {
+      fetchData();
+    }
+  }, [url]);  //Added dependency array to re-fetch data when URL changes
 
   return { data, loading, error };
 };
