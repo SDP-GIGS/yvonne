@@ -19,7 +19,7 @@ function LogList({ logs }) {
 
             {log.file && (
               <p>
-                📎 File: {log.file.name}
+                File: {log.file.name}
               </p>
             )}
 
