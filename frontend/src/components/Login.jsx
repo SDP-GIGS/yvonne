@@ -45,7 +45,7 @@ const Login = () => {
 
 }
 const styles = {
-    container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f2f5' },
+    container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f4f4f4' },
     card: { backgroundColor: '#fff', padding: '40px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)', width: '300px', textAlign: 'center' },
     form: { display: 'flex', flexDirection: 'column', gap: '20px' },
     input: { padding: '10px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '16px' },
