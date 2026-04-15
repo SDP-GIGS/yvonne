@@ -80,10 +80,15 @@ WSGI_APPLICATION = 'iles_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Replace the old DATABASES = { ... } with this:
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'iles_db',          # The name of the database you create in Postgres
+        'USER': 'postgres',         # Your Postgres username
+        'PASSWORD': 'iles_project26',  # Your Postgres password
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
