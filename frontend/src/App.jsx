@@ -7,13 +7,23 @@ import Dashboard from "./Dashboard";
 
 function App() {
   const [showDashboard, setShowDashboard] = useState(false);
-
+  const [currentUser, setCurrentUser] = useState({
+    id: 1,
+    name: "KAHUMA WALID"
+  });
+  const [logs, setLogs] = useState([]);
   return (
     <>
       <Navbar />
 
       {showDashboard ? (
-        <Dashboard goHome={() => setShowDashboard(false)} />
+        <Dashboard 
+        goHome={() => setShowDashboard(false)}
+        currentUser={currentUser}
+        logs={logs}
+        setLogs={setLogs}
+         />
+
       ) : (
         <>
           <Hero goToDashboard={() => setShowDashboard(true)} />
