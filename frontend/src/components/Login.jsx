@@ -48,8 +48,8 @@ const styles = {
     container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f4f4f4' },
     card: { backgroundColor: '#fff', padding: '2rem', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', width: '300px', textAlign: 'center' },
     form: { display: 'flex', flexDirection: 'column', gap: '1rem' },
-    input: { padding: '10px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '16px' },
-    button: { padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#007bff', color: '#fff', fontSize: '16px', cursor: 'pointer' },
+    input: { padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', fontSize: '16px' },
+    button: { padding: '0.5rem', borderRadius: '4px', border: 'none', backgroundColor: '#007bff', color: '#fff', fontSize: '16px', cursor: 'pointer' },
 };
 
 export default Login;
