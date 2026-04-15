@@ -2,27 +2,26 @@ import LogForm from "./LogForm";
 import LogList from "./LogList";
 import { useState } from "react";
 
-function Dashboard({ goHome }) {
-  const [logs, setLogs] = useState([]);
+function Dashboard({ goHome, currentUser, logs, setLogs }) {
+  
+  const userLogs = logs.filter(
+    (log) => log.userId === currentUser.id
+  );
 
   return (
     <div style={{ padding: "20px" }}>
       <button onClick={goHome}>Back to Home</button>
 
-      <h1>Intern Dashboard</h1>
+      <h1>{currentUser.name}'s Dashboard</h1>
 
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
-        
-        {/* LEFT: FORM */}
-        <div style={{ flex: 1 }}>
-          <LogForm logs={logs} setLogs={setLogs} />
-        </div>
+      <div style={{ display: "flex", gap: "20px" }}>
+        <LogForm
+          logs={logs}
+          setLogs={setLogs}
+          currentUser={currentUser}
+        />
 
-        {/* RIGHT: LIST */}
-        <div style={{ flex: 1 }}>
-          <LogList logs={logs} />
-        </div>
-
+        <LogList logs={userLogs} />
       </div>
     </div>
   );
