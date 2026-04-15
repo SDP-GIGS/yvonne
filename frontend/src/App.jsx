@@ -4,6 +4,8 @@ import Hero from "./Hero";
 import Features from "./Features";
 import Footer from "./Footer";
 import Dashboard from "./Dashboard";
+import LoginPage from "./pages/login/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [showDashboard, setShowDashboard] = useState(false);
@@ -13,16 +15,19 @@ function App() {
   });
   const [logs, setLogs] = useState([]);
   return (
-    <>
+    
+    <BrowserRouter>
       <Navbar />
 
       {showDashboard ? (
-        <Dashboard 
-        goHome={() => setShowDashboard(false)}
-        currentUser={currentUser}
-        logs={logs}
-        setLogs={setLogs}
-         />
+        // <Dashboard 
+        // goHome={() => setShowDashboard(false)}
+        // currentUser={currentUser}
+        // logs={logs}
+        // setLogs={setLogs}
+        //  />
+        
+        <LoginPage />
 
       ) : (
         <>
@@ -30,9 +35,19 @@ function App() {
           <Features />
         </>
       )}
-
+        <Routes>
+          {/* <Route path="/" element={<Hero goToDashboard={() => setShowDashboard(true)} />} />
+          <Route path="/dashboard" element={<Dashboard 
+        goHome={() => setShowDashboard(false)}
+        currentUser={currentUser}
+        logs={logs}
+        setLogs={setLogs}
+         />} /> */}
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+        </Routes>
       <Footer />
-    </>
+    </BrowserRouter>  
+    
   );
 }
 
