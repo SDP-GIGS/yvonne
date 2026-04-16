@@ -15,6 +15,7 @@ const LoginPage = () => {
       <div className="w-full max-w-md bg-white rounded-xl border border-gray-100 shadow-sm p-8">
         
         {/* Header Section */}
+        
         <div className="flex flex-col items-center mb-8">
           <div className="bg-[#1e3a8a] p-3 rounded-xl mb-4 shadow-md">
             <GraduationCap size={32} className="text-white" />
@@ -22,7 +23,7 @@ const LoginPage = () => {
           <h1 style={{color:'#1e3a8a', fontWeight: '900', fontsize:'2rem'}} 
           className= "uppercase tracking-light"
           >
-            INSYNC ILES
+            INSYNC-ILES
           </h1>
           <p className="text-sm text-gray-500 mt-1">
             Internship Logging & Evaluation System
@@ -30,6 +31,7 @@ const LoginPage = () => {
         </div>
 
         {/* Form Section */}
+        
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -59,22 +61,27 @@ const LoginPage = () => {
             />
           </div>
 
+          {/* Submit Button */} 
           <button
             type="submit"
             className="w-full bg-[#1e3a8a] hover:bg-[#172e6d] text-white font-semibold py-3 rounded-lg transition-colors shadow-sm active:transform active:scale-[0.98]"
           >
             Sign In
           </button>
+        
         </form>
 
         {/* Footer Section */}
+        
         <div className="mt-8 text-center">
+          
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
             <a href="#" className="text-[#1e3a8a] font-semibold hover:underline">
               Sign Up
             </a>
           </p>
+        
         </div>
       </div>
     </div>
