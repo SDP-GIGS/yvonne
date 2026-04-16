@@ -19,7 +19,11 @@ const LoginPage = () => {
           <div className="bg-[#1e3a8a] p-3 rounded-xl mb-4 shadow-md">
             <GraduationCap size={32} className="text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800 tracking-tight">INSYNC ILES</h1>
+          <h1 style={{color:'#1e3a8a', fontWeight: '900', fontsize:'2rem'}} 
+          className= "uppercase tracking-light"
+          >
+            INSYNC ILES
+          </h1>
           <p className="text-sm text-gray-500 mt-1">
             Internship Logging & Evaluation System
           </p>
