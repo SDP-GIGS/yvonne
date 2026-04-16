@@ -69,12 +69,14 @@ const LoginPage = () => {
 
         {/* Footer Section */}
         <div className="mt-8 text-center">
+          
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
             <a href="#" className="text-[#1e3a8a] font-semibold hover:underline">
               Sign Up
             </a>
           </p>
+        
         </div>
       </div>
     </div>
