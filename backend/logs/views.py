@@ -4,10 +4,16 @@ from rest_framework.permissions import IsAuthenticated
 from .models import WeeklyLog
 from .serializers import WeeklyLogSerializer
 from rest_framework.exceptions import ValidationError
+from logs.permissions import SupervisorOrStudent    
 
 class WeeklyLogViewSet(viewsets.ModelViewSet):
     serializer_class = WeeklyLogSerializer
 
+    #authentication$permissions
+    #only logged in users with a valid token session can enter
+    permission_classes=[IsAuthenticated, SupervisorOrStudent ]
+
+    #Queryset filtering (data_privacy)
     def get_queryset(self):
         user = self.request.user
         # RBAC: Students see their own logs; Supervisors see their assigned interns
