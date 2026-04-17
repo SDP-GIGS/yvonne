@@ -10,6 +10,9 @@ class InternshipPlacement(models.Model):
      
     def __str__(self):
         return f"{self.student.username} at {self.company_name}"
+    
+
+    
 
 
 
