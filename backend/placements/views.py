@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from .models import InternshipPlacement
 from .serializers import InternshipPlacementSerializer
 
+
+
 class InternshipPlacementViewSet(viewsets.ModelViewSet):
     queryset = InternshipPlacement.objects.all()
     serializer_class = InternshipPlacementSerializer
