@@ -14,6 +14,7 @@ const Admindashboard = () => {
         fetchAdminData();
     }, []);
 
+    
     if (!adminData) return <p>Loading Analytics...</p>;
 
     return (
@@ -40,6 +41,7 @@ const Admindashboard = () => {
         </div>
     );
 };
+
 
 export default Admindashboard;
 
