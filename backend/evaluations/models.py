@@ -14,6 +14,7 @@ class AcademicEvaluation(models.Model):
     comments = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_auto_now_add=True)
 
+
     @property
     def final_weighted_score(self):
         # Weighted Score Computation Logic
