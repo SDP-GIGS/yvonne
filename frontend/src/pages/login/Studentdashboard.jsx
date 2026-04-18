@@ -21,6 +21,7 @@ function getLogStatusBadge(status) {
   return <Badge variant="outline" className={map[status]}>{status}</Badge>;
 }
 
+
 export function StudentDashboard() {
   return (
     <div className="space-y-6">
