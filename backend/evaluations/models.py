@@ -7,6 +7,7 @@ class AcademicEvaluation(models.Model):
     supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     # Grading Criteria (Week 9)
+    
     organization_score = models.FloatField(default=0.0) # 40%
     logbook_score = models.FloatField(default=0.0)      # 30%
     final_report_score = models.FloatField(default=0.0) # 30%
