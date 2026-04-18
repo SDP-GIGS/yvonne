@@ -116,12 +116,14 @@ export function StudentDashboard() {
         <CardContent>
           <div className="grid grid-cols-2 gap-4 text-sm">
             {[
+              
               ["User", student.username],
               ["internship", student.internship],
               ["week_start", student.week_start],
               ["week_number", student.week_number],
               ["Content", student.content],
               ["submitted_at", student.submitted_at],
+            
             ].map(([label, value]) => (
               <div key={label}>
                 <p className="text-muted-foreground text-xs">{label}</p>
