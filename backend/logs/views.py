@@ -26,9 +26,18 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         instance = self.get_object()
         # Business Logic: Lock the log if it's already been Approved
+        
         if instance.status == 'APPROVED' and self.request.user.role == 'STUDENT':
             raise ValidationError("You cannot edit a log once it has been approved.")
         serializer.save()
+
+        #allowing students to delete a log once it was not intended
+    def perform_destroy(self, instance):
+        #prevent deletion of approved logs
+        if instance.status=="APPROVED":
+            raise ValidationError("You can not delete a log that has been approved")
+        instance.delete()
+
     
 
 
