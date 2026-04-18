@@ -36,6 +36,7 @@ export function StudentDashboard() {
         <StatCard title="Grade" value={student.grade || "PENDING"} icon={CheckCircle2} variant="default" />
       </div>
 
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="border-border">
           <CardHeader className="pb-2">
@@ -52,6 +53,7 @@ export function StudentDashboard() {
           </CardContent>
         </Card>
 
+        
         <Card className="lg:col-span-2 border-border">
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Score Breakdown</CardTitle>
