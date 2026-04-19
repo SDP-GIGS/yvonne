@@ -17,6 +17,7 @@ class AcademicEvaluation(models.Model):
 
 
     @property
+    
     def final_weighted_score(self):
         # Weighted Score Computation Logic
         return (self.organization_score * 0.4) + (self.logbook_score * 0.3) + (self.final_report_score * 0.3)
