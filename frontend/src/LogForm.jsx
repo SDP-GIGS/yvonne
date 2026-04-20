@@ -80,3 +80,4 @@ function LogForm({ logs, setLogs, currentUser}) {
 }
 
 export default LogForm;
+//to delete
