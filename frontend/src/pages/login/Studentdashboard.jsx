@@ -74,6 +74,7 @@ export function StudentDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
         {/* Progress Chart */}
         <Card className="border-border">
           <CardHeader className="pb-2">
