@@ -20,9 +20,9 @@ function Navbar() {
       }}
     >
       <h1 style={{ fontSize: "1.5rem", fontWeight: "700", margin: 0, background: "linear-gradient(to right, #60a5fa, #3b82f6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-        InSync ILES
+        InSync ILES 
       </h1>
-      <nav style={{ display: "flex", gap: "25px" }}>
+            <nav style={{ display: "flex", gap: "25px" }}>
         <Link to="/" style={{ color: "#e5e7eb", textDecoration: "none", fontWeight: "500", transition: "color 0.3s" }}>Home</Link>
         <Link to="/login" style={{ color: "#e5e7eb", textDecoration: "none", fontWeight: "500", transition: "color 0.3s" }}>Login</Link>
         <Link to="/signup" style={{ color: "#e5e7eb", textDecoration: "none", fontWeight: "500", transition: "color 0.3s" }}>Sign Up</Link>
@@ -30,4 +30,4 @@ function Navbar() {
     </header>
   );
 }
-export default Navbar;
+export default Navbar;
