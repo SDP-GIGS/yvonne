@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import CustomUser
 
-
 class UserSerializer(serializers.ModelSerializer):
     role_display = serializers.CharField(source='get_role_display', read_only=True)
+
 
     class Meta:
         model = CustomUser
