@@ -3,7 +3,7 @@ from django.conf import settings
 from placements.models import InternshipPlacement # Import your placement model
 
 class AcademicEvaluation(models.Model):
-    placement = models.OneToOneField(InternshipPlacement, on_remote=models.CASCADE)
+    placement = models.OneToOneField(InternshipPlacement, on_delete=models.CASCADE)
     supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     # Grading Criteria (Week 9)
@@ -13,7 +13,7 @@ class AcademicEvaluation(models.Model):
     final_report_score = models.FloatField(default=0.0) # 30%
     
     comments = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
     @property
