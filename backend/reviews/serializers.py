@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import SupervisorReview
 
+
 class SupervisorReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = SupervisorReview
