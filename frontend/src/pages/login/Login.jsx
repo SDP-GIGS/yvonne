@@ -40,7 +40,7 @@ const LoginPage = () => {
             </label>
             <input
               type="email"
-              placeholder="you@cit.ac.ug"
+              placeholder="name@cit.ac.ug"
               className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
