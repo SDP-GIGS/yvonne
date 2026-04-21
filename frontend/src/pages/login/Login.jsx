@@ -63,6 +63,7 @@ const LoginPage = () => {
           </div>
 
           {/* Submit Button */} 
+          
           <button
             type="submit"
             className="w-full bg-[#1e3a8a] hover:bg-[#172e6d] text-white font-semibold py-3 rounded-lg transition-colors shadow-sm active:transform active:scale-[0.98]"
@@ -88,5 +89,4 @@ const LoginPage = () => {
     </div>
   );
 };
-
 export default LoginPage;
