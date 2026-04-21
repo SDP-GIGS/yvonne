@@ -12,13 +12,12 @@ export default function CreateLog() {
             activity: activity,
             status: "Pending",
         };
-
-        setLogs([...logData, newLog]);
+        setLogs([...logs, newLog]);
         setActivity("");
     };
 
     const deleteLog = (id) => {
-        setLogs(logData.filter((log) => log.id !== id));
+        setLogs(logs.filter((log) => log.id !== id));
     };
 
     return (
