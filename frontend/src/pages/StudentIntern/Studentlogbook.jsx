@@ -1,66 +1,64 @@
 import { useState } from "react";
 
-export default function CreateLog() {
-    const [logData, setLogData] = useState([]);
-    const [activity, setActivity] = useState("");
+function StudentLogbook({ data, setData, studentId }) {
+  const [modal, setModal] = useState(null); // null | "add" | log object
+  const [form, setForm] = useState({ activities:"", skills:"", challenges:"" });
+  const myLogs = data.logs.filter(l => l.studentId === studentId);
 
-    const addLog = () => {
-        if (activity === "") return;
+  const openAdd = () => { setForm({ activities:"", skills:"", challenges:"" }); setModal("add"); };
+  const openEdit = (l) => { setForm({ activities: l.activities, skills: l.skills, challenges: l.challenges }); setModal(l); };
 
-        const newLog = {
-            id: Date.now(),
-            activity: activity,
-            status: "Pending",
-        };
-        setLogs([...logs, newLog]);
-        setActivity("");
-    };
+  const handleSave = (submitForReview) => {
+    if (modal === "add") {
+      const maxWeek = myLogs.reduce((m,l) => Math.max(m, l.week), 0);
+      const newLog = { id: Date.now(), studentId, week: maxWeek+1, dateRange:`Week ${maxWeek+1}`, status: submitForReview ? "Submitted" : "Draft", ...form, comment:null, reviewedBy:null, deadline:"TBD" };
+      setData(d => ({ ...d, logs: [...d.logs, newLog] }));
+    } else {
+      setData(d => ({ ...d, logs: d.logs.map(l => l.id === modal.id ? { ...l, ...form, status: submitForReview ? "Submitted" : l.status } : l) }));
+    }
+    setModal(null);
+  };
 
-    const deleteLog = (id) => {
-        setLogs(logs.filter((log) => log.id !== id));
-    };
+  const handleDelete = (id) => setData(d => ({ ...d, logs: d.logs.filter(l => l.id !== id) }));
 
-    return (
-        <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Create Internship Log</h1>
-            <div className="flex gap-3 mb-4">
-
-                <input
-                    type="text"
-                    placeholder="Describe your activity..."
-                    className="
-                    border p-2 rounded w-full"
-                    value={activity}
-                    onChange={(e) => setActivity(e.target.value)}
-                />
-                <button
-                    onClick={addLog}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-
-                    Add Log
-                </button>
-            </div>
-            <ul className="space-y-2">
-                {logData.map((log) => (
-                    <li
-                        key={log.id}
-                        className="flex justify-between bg-gray-100 p-3 rounded"
-                    >
-                        {log.activity}
-
-                        <button
-                            onClick={() => deleteLog(log.id)}
-                            className="text-red-500"
-                        >
-                            Delete
-                        </button>
-
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <PW>
+      <div className="flex justify-between items-start mb-7">
+        <PT title="Weekly Logbook" sub="13 weeks total · Field Attachment 2026" />
+        <GBtn onClick={openAdd}>+ New Log Entry</GBtn>
+      </div>
+      <div className="flex gap-2 mb-4">
+        {["Draft","Submitted","Reviewed","Approved"].map(s => (
+          <div key={s} className="flex items-center gap-1.5"><Badge s={s} /><span className="text-[10px] text-slate-500">{myLogs.filter(l=>l.status===s).length}</span></div>
+        ))}
+      </div>
+      <Table
+        headers={["Week","Date Range","Status","Deadline","Comment","Actions"]}
+        rows={myLogs.map(l => [
+          <span className="text-xs font-medium text-white">Week {l.week}</span>,
+          <span className="text-xs text-slate-400">{l.dateRange}</span>,
+          <Badge s={l.status} />,
+          <span className={`text-xs ${l.status==="Draft"?"text-amber-400":"text-slate-500"}`}>{l.deadline}</span>,
+          <span className="text-xs text-slate-500 max-w-[140px] truncate block">{l.comment ? `"${l.comment}"` : "—"}</span>,
+          <div className="flex gap-2">
+            {(l.status==="Draft"||l.status==="Submitted") && <button onClick={()=>openEdit(l)} className="text-[10px] border border-amber-800/40 text-amber-400 px-2 py-1 rounded hover:bg-amber-900/20">Edit</button>}
+            <button onClick={()=>handleDelete(l.id)} className="text-[10px] border border-red-900/40 text-red-400 px-2 py-1 rounded hover:bg-red-900/20">Del</button>
+          </div>
+        ])}
+      />
+      {modal && (
+        <Modal title={modal==="add" ? "New Log Entry" : `Edit Week ${modal.week}`} onClose={()=>setModal(null)}>
+          <Txta label="Activities Performed *" value={form.activities} onChange={e=>setForm({...form,activities:e.target.value})} placeholder="Describe your activities..." />
+          <Txta label="Skills Learned *" value={form.skills} onChange={e=>setForm({...form,skills:e.target.value})} placeholder="Skills acquired this week..." />
+          <Txta label="Challenges Faced" value={form.challenges} onChange={e=>setForm({...form,challenges:e.target.value})} placeholder="Difficulties and how you resolved them..." />
+          <div className="flex gap-2 mt-1">
+            <OBtn onClick={()=>handleSave(false)}>Save as Draft</OBtn>
+            <GBtn onClick={()=>handleSave(true)} disabled={!form.activities||!form.skills}>Submit for Review</GBtn>
+          </div>
+        </Modal>
+      )}
+    </PW>
+  );
 }
 
 
