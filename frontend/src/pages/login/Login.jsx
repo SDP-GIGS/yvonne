@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import api from '../../api';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log('Logging in with:', { email, password });
+
+    try {
+      const response = await api.post('/login', { email, password });
+      console.log('Server response:', response.data);
+      alert('Login successful!');
+    } catch (error) {
+      console.error('Login failed:', error.response?.data || error.message);
+      alert('Login failed. Please check your credentials.');
+    }
   };
 
   return (
