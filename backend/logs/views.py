@@ -42,6 +42,7 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
         if instance.status=="APPROVED":
             raise ValidationError("You can not delete a log that has been approved")
         instance.delete()
+        
 
     
 
