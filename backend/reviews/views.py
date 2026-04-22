@@ -18,4 +18,5 @@ class WeeklyReviewViewSet(viewsets.ModelViewSet):
         log = review.log
         log.status = 'APPROVED'
         log.save()
+        
 # Create your views here.
