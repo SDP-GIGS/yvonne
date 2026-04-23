@@ -12,7 +12,6 @@ const LoginPage = () => {
 
     try {
       const response = await api.post('/login', { email, password });
-      console.log('Server response:', response.data);
       alert('Login successful!');
     } catch (error) {
       console.error('Login failed:', error.response?.data || error.message);
