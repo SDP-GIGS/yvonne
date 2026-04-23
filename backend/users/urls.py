@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import TokenRefreshView
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 
+
+
 urlpatterns = [
     path('', include(router.urls)),
     #Standard JWT login path
