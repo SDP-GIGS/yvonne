@@ -7,6 +7,7 @@ const SignUpPage = () => {
         name: '',
         email: '',
         password: '',
+        role:'',
     });
     const navigate = useNavigate();
 
@@ -126,6 +127,28 @@ const SignUpPage = () => {
                                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                                 required
                                             />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="ml-1 text-sm font-medium text-slate-200">Role</label>
+                                        <div className="relative group">
+                                            <User className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500 transition-colors group-focus-within:text-sky-300" />
+                                            <select
+                                                className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
+                                                value={formData.role}
+                                                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                                                required
+                                                className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
+                                                style={{color:'gray'}}
+                                            >
+                                                <option value="">Select a role</option>
+                                                <option value="student">Student</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="workplacesupervisor">Workplace Supervisor</option>
+                                                <option value="academicadvisor">Academic Advisor</option>
+
+                                            </select>
                                         </div>
                                     </div>
 
