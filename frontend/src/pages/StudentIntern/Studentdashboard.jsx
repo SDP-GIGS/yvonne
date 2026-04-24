@@ -4,6 +4,7 @@ import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, Outl
 import { authAPI } from "../../api/apiService";
 
 function StudentDashboard({ data, studentId, onNav }) {
+  
   const me = data.students.find(s => s.id === studentId);
   const myLogs = data.logs.filter(l => l.studentId === studentId);
   const approved  = myLogs.filter(l => l.status === "Approved").length;
