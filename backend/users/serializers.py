@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from .models import CustomUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-User=get_user_model()
+
 
 class UserSerializer(serializers.ModelSerializer):
     role_display = serializers.CharField(source='get_role_display', read_only=True)
@@ -10,13 +10,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = get_user_model
+        model = CustomUser
         fields = ['id', 'username',  'first_name', 'last_name', 'role','email' ,'password','role_display']
 
     def create(self, validate_data):
         #we use create_user to ensure the password is hashed 
         #turning the password into unreadable string for safety
-        user=User.objects.create_user(
+        user=user.objects.create_user(
             username=validate_data['username'],
             email=validate_data['email'],
             password=validate_data['password'],
