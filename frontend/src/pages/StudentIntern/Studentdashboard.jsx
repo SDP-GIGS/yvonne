@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
-import { authAPI } from "../../api/apiService";
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, Val, Lbl, GBtn } from "../../shared/ui";
+import { useStudentDashboard } from "../../hooks/useData";
 
-function StudentDashboard({ data, studentId, onNav }) {
-  
-  const me = data.students.find(s => s.id === studentId);
-  const myLogs = data.logs.filter(l => l.studentId === studentId);
-  const approved  = myLogs.filter(l => l.status === "Approved").length;
+export default function StudentDashboard() {
+  const navigate = useNavigate();
+  const { data, loading, error } = useStudentDashboard();
+
+  if (loading) return <PW><LoadingSpinner /></PW>;
+  if (error) return <PW><ErrorMsg message={error} /></PW>;
+  if (!data) return <PW><EmptyState /></PW>;
+
+  const me = data; // Mock hook returns student data directly
+  const myLogs = data.logs || [];
+  const approved  = myLogs.filter(l => l.status === "Approved" || l.status === "ACCEPTED").length;
   const submitted = myLogs.filter(l => l.status === "Submitted").length;
-  const drafts    = myLogs.filter(l => l.status === "Draft").length;
-  const myPlacement = data.placements.find(p => p.studentId === studentId);
+  const drafts    = myLogs.filter(l => l.status === "Draft" || l.status === "PENDING").length;
+  const myPlacement = data.placements?.[0];
   const latestReview = [...myLogs].reverse().find(l => l.comment);
   const pending = myLogs.filter(l => l.status === "Draft").slice(0, 3);
 
@@ -44,7 +51,7 @@ function StudentDashboard({ data, studentId, onNav }) {
               ))}
             </div>
           ) : <p className="text-slate-500 text-xs">No placement assigned.</p>}
-          <button onClick={() => onNav("placement")} className="mt-3 text-xs text-amber-400 border border-amber-800/40 px-3 py-1.5 rounded-lg hover:bg-amber-900/20 transition-colors">View Details →</button>
+          <button onClick={() => navigate("placement")} className="mt-3 text-xs text-amber-400 border border-amber-800/40 px-3 py-1.5 rounded-lg hover:bg-amber-900/20 transition-colors">View Details →</button>
         </Card>
         <Card>
           <div className="text-sm font-medium text-white mb-3">Logbook Progress</div>
@@ -61,7 +68,7 @@ function StudentDashboard({ data, studentId, onNav }) {
               <Badge s={l.status} />
             </div>
           ))}
-          <button onClick={() => onNav("logbook")} className="mt-2 text-xs text-amber-400 border border-amber-800/40 px-3 py-1.5 rounded-lg hover:bg-amber-900/20 transition-colors">View All Logs →</button>
+          <button onClick={() => navigate("logbook")} className="mt-2 text-xs text-amber-400 border border-amber-800/40 px-3 py-1.5 rounded-lg hover:bg-amber-900/20 transition-colors">View All Logs →</button>
         </Card>
         <Card>
           <div className="text-sm font-medium text-white mb-3">Latest Review Comment</div>
@@ -81,7 +88,7 @@ function StudentDashboard({ data, studentId, onNav }) {
             : pending.map(l => (
             <div key={l.id} className="flex justify-between items-center bg-amber-900/10 rounded-lg px-3 py-2 mb-2">
               <div><div className="text-xs text-white">Week {l.week} logbook</div><div className="text-[10px] text-slate-500">Due: {l.deadline}</div></div>
-              <GBtn onClick={() => onNav("logbook")} cls="!py-1 !px-3">Submit</GBtn>
+              <GBtn onClick={() => navigate("logbook")} cls="!py-1 !px-3">Submit</GBtn>
             </div>
           ))}
         </Card>

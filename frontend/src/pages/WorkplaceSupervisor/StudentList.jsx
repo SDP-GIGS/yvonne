@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
 import { useWPDashboard, useWPStudents, useWPStudent, useWPStudentLogs,
   useReviewQueue, useWPLog, useReviewLog } from "../../hooks/useData";
 import { authAPI } from "../../api/apiService";
 
-export function WPStudentsPage({ onViewStudent }) {
-  const { data: students, loading, error } = useWPStudents();
+export default function WPStudentsPage({ onViewStudent }) {
+  const { data: rawData } = useOutletContext() || {};
+  const { data: studentsData, loading, error } = useWPStudents();
+  
+  const students = studentsData || (rawData?.students) || [];
 
-  if (loading) return <PageWrap><LoadingSpinner /></PageWrap>;
-  if (error)   return <PageWrap><ErrorMsg message={error} /></PageWrap>;
+  if (loading && !students.length) return <PageWrap><LoadingSpinner /></PageWrap>;
+  if (error && !students.length)   return <PageWrap><ErrorMsg message={error} /></PageWrap>;
 
   return (
     <PageWrap>
@@ -38,7 +42,7 @@ export function WPStudentsPage({ onViewStudent }) {
                     <td style={{ padding: "14px 16px", fontSize: 12, color: COLORS.muted }}>{s.start_date} – {s.end_date}</td>
                     <td style={{ padding: "14px 16px" }}><StatusBadge status={s.placement_status} /></td>
                     <td style={{ padding: "14px 16px" }}>
-                      <button onClick={() => onViewStudent(s.id)} style={{ background: "transparent", border: `1px solid ${COLORS.navyBorder}`, color: COLORS.mutedLight, borderRadius: 6, padding: "5px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>
+                      <button onClick={() => onViewStudent && onViewStudent(s.id)} style={{ background: "transparent", border: `1px solid ${COLORS.navyBorder}`, color: COLORS.mutedLight, borderRadius: 6, padding: "5px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>
                         View Logs
                       </button>
                     </td>

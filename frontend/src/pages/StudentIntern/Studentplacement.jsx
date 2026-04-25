@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, PT, Val, Lbl } from "../../shared/ui";
 import { authAPI } from "../../api/apiService";
 
-function StudentPlacement({ data, studentId }) {
-  const p = data.placements.find(x => x.studentId === studentId);
+export default function StudentPlacement() {
+  const { data: rawData, studentId } = useOutletContext();
+  const data = rawData || { placements: [], students: [] };
+  const p = (data.placements || []).find(x => x.studentId === studentId);
   if (!p) return <PW><PT title="My Placement" /><p className="text-slate-500 text-sm">No placement assigned yet.</p></PW>;
   return (
     <PW>
@@ -35,7 +38,7 @@ function StudentPlacement({ data, studentId }) {
           <Card>
             <div className="text-sm font-medium text-white mb-3">Workplace Supervisor</div>
             <div className="w-12 h-12 rounded-full bg-[#1A2540] border border-[#1F2E4A] flex items-center justify-center text-amber-400 font-bold mb-3">
-              {p.wpSup.split(" ").map(w=>w[0]).slice(1,3).join("")}
+              {p.wpSup.split(" ").map(w=>w[0]).slice(0,2).join("")}
             </div>
             <div className="font-medium text-sm text-white mb-1">{p.wpSup}</div>
             <div className="text-xs text-slate-500">IT Department Lead</div>

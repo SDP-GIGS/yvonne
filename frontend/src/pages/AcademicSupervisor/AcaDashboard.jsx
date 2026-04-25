@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
-import { useAcaDashboard, useAcaStudents, useAcaStudent, useAcaStudentLogs,
-  useAcaEvaluations, useEvalCriteria, useSubmitEvaluation } from "../../hooks/useData";
-import { authAPI } from "../../api/apiService";
+  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW } from "../../shared/ui";
+import { useAcaDashboard } from "../../hooks/useData";
 
-export function AcaDashboardPage({ onNav }) {
+export function AcaDashboardPage() {
+  const navigate = useNavigate();
   const { data: stats, loading, error } = useAcaDashboard();
 
-  if (loading) return <PageWrap><LoadingSpinner /></PageWrap>;
-  if (error)   return <PageWrap><ErrorMsg message={error} /></PageWrap>;
+  if (loading) return <PW><LoadingSpinner /></PW>;
+  if (error)   return <PW><ErrorMsg message={error} /></PW>;
 
   return (
     <PageWrap>
@@ -33,7 +33,7 @@ export function AcaDashboardPage({ onNav }) {
         <Card>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <div style={{ fontWeight: 500, fontSize: 14 }}>Pending Evaluations</div>
-            <OutlineBtn onClick={() => onNav("students")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
+            <OutlineBtn onClick={() => navigate("students")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
           </div>
           {(stats?.pending_students || []).length === 0
             ? <EmptyState message="All students evaluated." />
@@ -43,7 +43,7 @@ export function AcaDashboardPage({ onNav }) {
                   <div style={{ fontSize: 13, color: COLORS.white }}>{s.name}</div>
                   <div style={{ fontSize: 11, color: COLORS.muted }}>{s.reg_number}</div>
                 </div>
-                <GoldBtn onClick={() => onNav("evaluate", s.id)} style={{ fontSize: 11, padding: "5px 12px" }}>Evaluate</GoldBtn>
+                <GoldBtn onClick={() => navigate("students")} style={{ fontSize: 11, padding: "5px 12px" }}>Evaluate</GoldBtn>
               </div>
             ))
           }

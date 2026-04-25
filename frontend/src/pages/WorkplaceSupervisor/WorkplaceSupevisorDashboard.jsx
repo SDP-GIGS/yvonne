@@ -1,16 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
-import { useWPDashboard, useWPStudents, useWPStudent, useWPStudentLogs,
-  useReviewQueue, useWPLog, useReviewLog } from "../../hooks/useData";
-import { authAPI } from "../../api/apiService";
+  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW } from "../../shared/ui";
+import { useWorkplaceDashboard } from "../../hooks/useData";
 
+export function WorkplaceSupervisorDashboard() {
+  const navigate = useNavigate();
+  const { data: stats, loading, error } = useWorkplaceDashboard();
 
-export function WPDashboardPage({ onNav }) {
-  const { data: stats, loading, error } = useWPDashboard();
-
-  if (loading) return <PageWrap><LoadingSpinner /></PageWrap>;
-  if (error)   return <PageWrap><ErrorMsg message={error} /></PageWrap>;
+  if (loading) return <PW><LoadingSpinner /></PW>;
+  if (error)   return <PW><ErrorMsg message={error} /></PW>;
 
   const pending = stats?.review_queue || [];
 
@@ -39,7 +38,7 @@ export function WPDashboardPage({ onNav }) {
         <Card>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <div style={{ fontWeight: 500, fontSize: 14 }}>Pending Reviews</div>
-            <OutlineBtn onClick={() => onNav("queue")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
+            <OutlineBtn onClick={() => navigate("review")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
           </div>
           {pending.length === 0
             ? <EmptyState message="No logs pending review." />
@@ -49,7 +48,7 @@ export function WPDashboardPage({ onNav }) {
                   <div style={{ fontSize: 13, color: COLORS.white }}>{item.student_name}</div>
                   <div style={{ fontSize: 11, color: COLORS.muted }}>Week {item.week_number} · Submitted {item.submitted_on}</div>
                 </div>
-                <GoldBtn onClick={() => onNav("review", item.id)} style={{ fontSize: 11, padding: "5px 12px" }}>Review</GoldBtn>
+                <GoldBtn onClick={() => navigate("review")} style={{ fontSize: 11, padding: "5px 12px" }}>Review</GoldBtn>
               </div>
             ))
           }
@@ -59,7 +58,7 @@ export function WPDashboardPage({ onNav }) {
         <Card>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <div style={{ fontWeight: 500, fontSize: 14 }}>My Students</div>
-            <OutlineBtn onClick={() => onNav("students")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
+            <OutlineBtn onClick={() => navigate("students")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
           </div>
           {(stats?.students || []).slice(0, 4).map(s => (
             <div key={s.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: `1px solid ${COLORS.navyBorder}` }}>

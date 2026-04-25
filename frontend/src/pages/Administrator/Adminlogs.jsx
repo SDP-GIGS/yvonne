@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import { PW, PT, Table, Badge, DBtn } from "../../shared/ui";
 
-function AdminLogs({ data, setData }) {
+export default function AdminLogs() {
+  const { data: rawData, setData } = useOutletContext();
+  const data = rawData || { logs: [], students: [] };
   const [filter, setFilter] = useState("All");
-  const filtered = filter==="All" ? data.logs : data.logs.filter(l=>l.status===filter);
+  const filtered = filter==="All" ? (data.logs || []) : (data.logs || []).filter(l=>l.status===filter);
   const override = (id, st) => setData(d=>({...d,logs:d.logs.map(l=>l.id===id?{...l,status:st}:l)}));
   const del = (id) => setData(d=>({...d,logs:d.logs.filter(l=>l.id!==id)}));
 
@@ -17,7 +21,7 @@ function AdminLogs({ data, setData }) {
       <Table
         headers={["Student","Week","Date Range","Current Status","Override Status","Actions"]}
         rows={filtered.map(l=>{
-          const s = data.students.find(s=>s.id===l.studentId);
+          const s = (data.students || []).find(s=>s.id===l.studentId);
           return [
             <div><div className="text-xs font-medium text-white">{s?.name}</div><div className="text-[10px] text-slate-500">{s?.reg}</div></div>,
             <span className="text-xs text-white">Week {l.week}</span>,

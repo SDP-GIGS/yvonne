@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
   StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
 import { useWPDashboard, useWPStudents, useWPStudent, useWPStudentLogs,
   useReviewQueue, useWPLog, useReviewLog } from "../../hooks/useData";
 import { authAPI } from "../../api/apiService";
 
-export function WPReviewQueuePage({ onOpenReview }) {
-  const { data: queue, loading, error } = useReviewQueue();
+export default function WPReviewQueuePage({ onOpenReview }) {
+  const { data: rawData } = useOutletContext() || {};
+  const { data: queueData, loading, error } = useReviewQueue();
+  
+  const queue = queueData || (rawData?.review_queue) || [];
 
-  if (loading) return <PageWrap><LoadingSpinner /></PageWrap>;
-  if (error)   return <PageWrap><ErrorMsg message={error} /></PageWrap>;
+  if (loading && !queue.length) return <PageWrap><LoadingSpinner /></PageWrap>;
+  if (error && !queue.length)   return <PageWrap><ErrorMsg message={error} /></PageWrap>;
 
   return (
     <PageWrap>
@@ -37,7 +41,7 @@ export function WPReviewQueuePage({ onOpenReview }) {
                     <td style={{ padding: "14px 16px", fontSize: 13, color: COLORS.mutedLight }}>{item.date_range}</td>
                     <td style={{ padding: "14px 16px", fontSize: 12, color: COLORS.muted }}>{item.submitted_on}</td>
                     <td style={{ padding: "14px 16px" }}>
-                      <GoldBtn onClick={() => onOpenReview(item.id)} style={{ fontSize: 11, padding: "6px 14px" }}>Review</GoldBtn>
+                      <GoldBtn onClick={() => onOpenReview && onOpenReview(item.id)} style={{ fontSize: 11, padding: "6px 14px" }}>Review</GoldBtn>
                     </td>
                   </tr>
                 ))}
@@ -49,9 +53,7 @@ export function WPReviewQueuePage({ onOpenReview }) {
   );
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// LOG REVIEW FORM
-// ══════════════════════════════════════════════════════════════════════════════
+// Named export for the review page if needed
 export function WPLogReviewPage({ logId, onBack, onDone }) {
   const { data: log, loading, error } = useWPLog(logId);
   const { mutate: reviewLog, loading: reviewing, error: reviewErr } = useReviewLog();

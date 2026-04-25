@@ -5,7 +5,7 @@ import { useAcaDashboard, useAcaStudents, useAcaStudent, useAcaStudentLogs,
   useAcaEvaluations, useEvalCriteria, useSubmitEvaluation } from "../../hooks/useData";
 import { authAPI } from "../../api/apiService";
 
-export function AcaEvaluationHistoryPage({ onViewDetail }) {
+export default function AcaEvaluationHistoryPage({ onViewDetail }) {
   const { data: evaluations, loading, error } = useAcaEvaluations();
 
   if (loading) return <PageWrap><LoadingSpinner /></PageWrap>;
@@ -39,7 +39,7 @@ export function AcaEvaluationHistoryPage({ onViewDetail }) {
                     </td>
                     <td style={{ padding: "14px 16px", fontSize: 12, color: COLORS.muted }}>{ev.submitted_on}</td>
                     <td style={{ padding: "14px 16px" }}>
-                      <button onClick={() => onViewDetail(ev.id)} style={{ background: "transparent", border: `1px solid ${COLORS.navyBorder}`, color: COLORS.mutedLight, borderRadius: 6, padding: "5px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>View</button>
+                      <button onClick={() => onViewDetail && onViewDetail(ev.id)} style={{ background: "transparent", border: `1px solid ${COLORS.navyBorder}`, color: COLORS.mutedLight, borderRadius: 6, padding: "5px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>View</button>
                     </td>
                   </tr>
                 ))}

@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, PT, GBtn, Table, Modal, Txta, OBtn } from "../../shared/ui";
 import { authAPI } from "../../api/apiService";
 
-function StudentLogbook({ data, setData, studentId }) {
+export default function StudentLogbook() {
+  const { data: rawData, setData, studentId } = useOutletContext();
+  const data = rawData || { logs: [], students: [] };
   const [modal, setModal] = useState(null); // null | "add" | log object
   const [form, setForm] = useState({ activities:"", skills:"", challenges:"" });
-  const myLogs = data.logs.filter(l => l.studentId === studentId);
+  const myLogs = (data.logs || []).filter(l => l.studentId === studentId || l.userId === studentId);
 
   const openAdd = () => { setForm({ activities:"", skills:"", challenges:"" }); setModal("add"); };
   const openEdit = (l) => { setForm({ activities: l.activities, skills: l.skills, challenges: l.challenges }); setModal(l); };
@@ -63,6 +66,3 @@ function StudentLogbook({ data, setData, studentId }) {
     </PW>
   );
 }
-
-
-

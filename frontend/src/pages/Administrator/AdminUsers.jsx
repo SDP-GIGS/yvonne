@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, PT, GBtn, Table, Modal, Inp, Sel, OBtn, DBtn } from "../../shared/ui";
 
-function AdminUsers({ data, setData }) {
+export default function AdminUsers() {
+  const { data: rawData, setData } = useOutletContext();
+  const data = rawData || { students: [], logs: [], placements: [], evaluations: [] };
   const [modal, setModal] = useState(false);
   const [form, setForm] = useState({ name:"", reg:"", email:"", role:"Student", company:"", dept:"", status:"Active" });
   const handleAdd = () => {
     const newS = { id: Date.now(), name:form.name, reg:form.reg, email:form.email, program:"B.Sc. CS", company:form.company, dept:form.dept, wpSup:"TBD", acaSup:"TBD", start:"2026-06-02", end:"2026-08-29", status:form.status };
-    setData(d=>({...d, students:[...d.students,newS]}));
+    setData(d=>({...d, students:[...(d.students || []),newS]}));
     setModal(false); setForm({ name:"",reg:"",email:"",role:"Student",company:"",dept:"",status:"Active" });
   };
-  const handleRemove = (id) => setData(d=>({...d,students:d.students.filter(s=>s.id!==id),logs:d.logs.filter(l=>l.studentId!==id),placements:d.placements.filter(p=>p.studentId!==id),evaluations:d.evaluations.filter(e=>e.studentId!==id)}));
+  const handleRemove = (id) => setData(d=>({
+    ...d,
+    students: (d.students || []).filter(s=>s.id!==id),
+    logs: (d.logs || []).filter(l=>l.studentId!==id),
+    placements: (d.placements || []).filter(p=>p.studentId!==id),
+    evaluations: (d.evaluations || []).filter(e=>e.studentId!==id)
+  }));
 
   return (
     <PW>
@@ -18,7 +29,7 @@ function AdminUsers({ data, setData }) {
       </div>
       <Table
         headers={["User","Reg No.","Role","Company","Status","Actions"]}
-        rows={data.students.map(s=>[
+        rows={(data.students || []).map(s=>[
           <div><div className="text-xs font-medium text-white">{s.name}</div><div className="text-[10px] text-slate-500">{s.email}</div></div>,
           <span className="text-xs text-slate-400">{s.reg}</span>,
           <span className="text-xs text-amber-400/80">Student</span>,

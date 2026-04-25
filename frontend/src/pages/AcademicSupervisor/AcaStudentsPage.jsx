@@ -5,7 +5,7 @@ import { useAcaDashboard, useAcaStudents, useAcaStudent, useAcaStudentLogs,
   useAcaEvaluations, useEvalCriteria, useSubmitEvaluation } from "../../hooks/useData";
 import { authAPI } from "../../api/apiService";
 
-export function AcaStudentsPage({ onViewStudent, onEvaluate }) {
+export default function AcaStudentsPage({ onViewStudent, onEvaluate }) {
   const { data: students, loading, error } = useAcaStudents();
 
   if (loading) return <PageWrap><LoadingSpinner /></PageWrap>;
@@ -40,9 +40,9 @@ export function AcaStudentsPage({ onViewStudent, onEvaluate }) {
                     </td>
                     <td style={{ padding: "14px 16px" }}>
                       <div style={{ display: "flex", gap: 8 }}>
-                        <button onClick={() => onViewStudent(s.id)} style={{ background: "transparent", border: `1px solid ${COLORS.navyBorder}`, color: COLORS.mutedLight, borderRadius: 6, padding: "5px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>View</button>
+                        <button onClick={() => onViewStudent && onViewStudent(s.id)} style={{ background: "transparent", border: `1px solid ${COLORS.navyBorder}`, color: COLORS.mutedLight, borderRadius: 6, padding: "5px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>View</button>
                         {s.evaluation_status !== "Complete" && (
-                          <GoldBtn onClick={() => onEvaluate(s.id)} style={{ fontSize: 11, padding: "5px 12px" }}>Evaluate</GoldBtn>
+                          <GoldBtn onClick={() => onEvaluate && onEvaluate(s.id)} style={{ fontSize: 11, padding: "5px 12px" }}>Evaluate</GoldBtn>
                         )}
                       </div>
                     </td>

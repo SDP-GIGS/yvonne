@@ -1,64 +1,37 @@
 import { useState, useEffect } from "react";
-import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
-import { useAcaDashboard, useAcaStudents, useAcaStudent, useAcaStudentLogs,
-  useAcaEvaluations, useEvalCriteria, useSubmitEvaluation } from "../../hooks/useData";
+import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, PT, GBtn, Inp } from "../../shared/ui";
 import { authAPI } from "../../api/apiService";
 
-export function AcaProfilePage() {
-  const [tab, setTab] = useState("info");
-  const [form, setForm] = useState({ first_name: "", last_name: "", email: "", department: "" });
-  const [pwForm, setPwForm] = useState({ current_password: "", new_password: "", confirm_password: "" });
-  const [msg, setMsg] = useState(""); const [err, setErr] = useState(""); const [saving, setSaving] = useState(false);
-
-  const handlePw = async () => {
-    if (pwForm.new_password !== pwForm.confirm_password) { setErr("Passwords do not match."); return; }
-    setSaving(true); setMsg(""); setErr("");
-    try { await authAPI.changePassword({ current_password: pwForm.current_password, new_password: pwForm.new_password }); setMsg("Password updated."); } catch (e) { setErr(e.message); } finally { setSaving(false); }
-  };
-
+export default function AcaProfilePage() {
+  const [form, setForm] = useState({ first_name: "Robert", last_name: "King", email: "r.king@mak.ac.ug" });
+  const [saved, setSaved] = useState(false);
+  const handleSave = () => { setSaved(true); setTimeout(()=>setSaved(false),2000); };
   return (
-    <PageWrap>
-      <PageTitle title="Profile & Settings" />
-      <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: 20, maxWidth: 820 }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <Card style={{ textAlign: "center", padding: 24 }}>
-            <div style={{ width: 68, height: 68, borderRadius: "50%", background: COLORS.navyLight, border: `2px solid ${COLORS.gold}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, fontWeight: 600, color: COLORS.gold, margin: "0 auto 12px" }}>AS</div>
-            <div style={{ fontWeight: 500, fontSize: 14, marginBottom: 2 }}>Academic Supervisor</div>
-            <div style={{ fontSize: 11, color: COLORS.gold, marginTop: 6 }}>Academic Supervisor</div>
-          </Card>
-          <Card style={{ padding: 8 }}>
-            {[{ id: "info", label: "Personal Info" }, { id: "password", label: "Change Password" }].map(t => (
-              <button key={t.id} onClick={() => { setTab(t.id); setMsg(""); setErr(""); }} style={{ width: "100%", textAlign: "left", padding: "9px 12px", background: tab === t.id ? COLORS.navyLight : "transparent", border: "none", borderRadius: 6, marginBottom: 2, color: tab === t.id ? COLORS.white : COLORS.muted, fontSize: 13, cursor: "pointer", fontFamily: "inherit", display: "block" }}>{t.label}</button>
-            ))}
-          </Card>
-        </div>
-        <Card>
-          {msg && <div style={{ background: "#0F2A20", border: "1px solid #0F3A20", color: COLORS.success, borderRadius: 8, padding: "10px 14px", marginBottom: 16, fontSize: 13 }}>✓ {msg}</div>}
-          {err && <div style={{ background: "#2A0F0F", border: "1px solid #5A2020", color: COLORS.danger, borderRadius: 8, padding: "10px 14px", marginBottom: 16, fontSize: 13 }}>⚠ {err}</div>}
-          {tab === "info" ? (
-            <>
-              <div style={{ fontWeight: 500, fontSize: 14, marginBottom: 20, color: COLORS.gold }}>Personal Information</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
-                {[["First Name","first_name"],["Last Name","last_name"],["Email","email"],["Department","department"]].map(([label, key]) => (
-                  <div key={key}><Label>{label}</Label><input style={inputStyle()} value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })} /></div>
-                ))}
-              </div>
-              <GoldBtn disabled={saving}>{saving ? "Saving..." : "Save Changes"}</GoldBtn>
-            </>
-          ) : (
-            <>
-              <div style={{ fontWeight: 500, fontSize: 14, marginBottom: 20, color: COLORS.gold }}>Change Password</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 380 }}>
-                {[["Current Password","current_password"],["New Password","new_password"],["Confirm New Password","confirm_password"]].map(([label, key]) => (
-                  <div key={key}><Label>{label}</Label><input type="password" style={inputStyle()} value={pwForm[key]} onChange={e => setPwForm({ ...pwForm, [key]: e.target.value })} placeholder="••••••••" /></div>
-                ))}
-                <GoldBtn onClick={handlePw} disabled={saving}>{saving ? "Updating..." : "Update Password"}</GoldBtn>
-              </div>
-            </>
-          )}
+    <PW>
+      <PT title="Profile & Settings" sub="Manage your academic supervisor account" />
+      <div className="grid grid-cols-4 gap-4 max-w-3xl">
+        <Card cls="text-center !py-6">
+          <div className="w-14 h-14 rounded-full bg-[#1A2540] border-2 border-amber-500 flex items-center justify-center text-amber-400 font-bold text-lg mx-auto mb-3">
+            RK
+          </div>
+          <div className="text-xs font-medium text-white">Dr. Robert King</div>
+          <div className="text-[10px] text-slate-500 mt-0.5">Faculty of Computing</div>
+          <div className="text-[10px] text-amber-400 mt-1">Academic Supervisor</div>
+        </Card>
+        <Card cls="col-span-3">
+          {saved && <div className="bg-emerald-900/30 border border-emerald-800/40 text-emerald-400 text-xs rounded-lg px-3 py-2 mb-4">✓ Profile updated successfully.</div>}
+          <div className="text-sm font-medium text-amber-400 mb-4">Personal Information</div>
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <Inp label="First Name" value={form.first_name} onChange={e=>setForm({...form,first_name:e.target.value})} />
+            <Inp label="Last Name"  value={form.last_name}  onChange={e=>setForm({...form,last_name:e.target.value})} />
+            <Inp label="Email"      value={form.email}      onChange={e=>setForm({...form,email:e.target.value})} />
+            <Inp label="Faculty"    value="Computing & IT" disabled className="opacity-50" />
+            <Inp label="University" value="Makerere University" disabled className="opacity-50" />
+          </div>
+          <GBtn onClick={handleSave}>Save Changes</GBtn>
         </Card>
       </div>
-    </PageWrap>
+    </PW>
   );
 }

@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle } from "../../shared/ui";
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, PT, GBtn, Inp } from "../../shared/ui";
 import { authAPI } from "../../api/apiService";
 
-function StudentProfile({ data, studentId }) {
-  const me = data.students.find(s => s.id === studentId);
+export default function StudentProfile() {
+  const { data: rawData, studentId } = useOutletContext();
+  const data = rawData || { students: [] };
+  const me = (data.students || []).find(s => s.id === studentId);
   const [form, setForm] = useState({ first_name: me?.name.split(" ")[0]||"", last_name: me?.name.split(" ").slice(1).join(" ")||"", email: me?.email||"" });
   const [saved, setSaved] = useState(false);
   const handleSave = () => { setSaved(true); setTimeout(()=>setSaved(false),2000); };
