@@ -14,7 +14,7 @@ function Dashboard({ goHome,
     <div style={{ padding: "20px" }}>
       <button onClick={goHome}>Back to Home</button>
 
-      <h1>{currentUser.name}'s Dashboard</h1>
+      <h1>{currentUser.name}'s Dashboard </h1>
 
       <div style={{ display: "flex", gap: "20px" }}>
         <LogForm
