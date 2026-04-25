@@ -61,6 +61,7 @@ function App() {
               <Route path="profile" element={<StudentProfile />} />
             </Route>
 
+
             {/* Admin Portal */}
             <Route path="/admin" element={<DashboardShell role="ADMIN" />}>
               <Route index element={<AdminDashboardPage />} />
@@ -102,5 +103,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;
