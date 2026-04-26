@@ -1,10 +1,23 @@
+import { ClipboardCheck, BarChart3, FileText } from "lucide-react";
 import FeatureCard from "./FeatureCard";
 
 function Features() {
   const features = [
-    { title: "Logging", text: "Capture weekly activities in a structured flow that is easy to scan and review." },
-    { title: "Evaluation", text: "Review progress with clear metrics for supervisors, students, and administrators." },
-    { title: "Reports", text: "Turn internship data into clean summaries that support faster decisions." }
+    { 
+      title: "Logging", 
+      text: "Capture weekly activities in a structured flow that is easy to scan and review.",
+      icon: ClipboardCheck 
+    },
+    { 
+      title: "Evaluation", 
+      text: "Review progress with clear metrics for supervisors, students, and administrators.",
+      icon: BarChart3 
+    },
+    { 
+      title: "Reports", 
+      text: "Turn internship data into clean summaries that support faster decisions.",
+      icon: FileText 
+    }
   ];
 
   return (
@@ -25,6 +38,7 @@ function Features() {
               key={feature.title}
               title={feature.title}
               text={feature.text}
+              icon={feature.icon}
             />
           ))}
         </div>
