@@ -14,9 +14,11 @@ const LandingPage = () => {
   return (
     <>
       <Hero
+
         onPrimaryAction={() => navigate("/signup")}
         onSecondaryAction={() => navigate("/login")}
         onExploreFeatures={scrollToFeatures}
+
       />
       <Features />
     </>
