@@ -7,9 +7,9 @@ const SignUpPage = () => {
         name: '',
         email: '',
         password: '',
-        role:'',
+        role: '',
     });
-    
+
     const navigate = useNavigate();
 
     const handleSignUp = (e) => {
@@ -139,9 +139,9 @@ const SignUpPage = () => {
                                                 className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
                                                 value={formData.role}
                                                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+
                                                 required
-                                                className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
-                                                style={{color:'gray'}}
+                                                style={{ color: 'gray' }}
                                             >
                                                 <option value="">Select a role</option>
                                                 <option value="student">Student</option>
