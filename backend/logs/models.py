@@ -7,6 +7,7 @@ class WeeklyLog(models.Model):
         SUBMITTED = 'SUBMITTED', 'Submitted'
         REVIEWED ='REVIEWED', 'Reveiwed'
         APPROVED = 'APPROVED', 'Approved'
+        
 
     student = models.ForeignKey(
         settings.AUTH_USER_MODEL,
