@@ -27,7 +27,7 @@ function Features() {
           <p className="text-sm font-medium uppercase tracking-[0.28em] text-sky-300">Platform features</p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Built for the workflow your interns actually use.</h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            The landing page now introduces the product with clearer structure and better spacing so users know where to go next.
+            Our landing page now introduces the product with clearer structure and better spacing so users know where to go next.
           </p>
         </div>
 

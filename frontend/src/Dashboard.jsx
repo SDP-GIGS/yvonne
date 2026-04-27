@@ -2,7 +2,6 @@ import LogForm from "./LogForm";
 import LogList from "./LogList";
 import { useState } from "react";
 
-
 function Dashboard({ goHome,
    currentUser, logs, setLogs }) {
   
