@@ -32,4 +32,4 @@ function LogList({ logs }) {
 }
 
 export default LogList;
-//to delete
+//to delete since its idle
