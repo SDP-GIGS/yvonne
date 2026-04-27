@@ -15,5 +15,4 @@ class InternshipPlacement(models.Model):
     
 
 
-
 # Create your models here.
