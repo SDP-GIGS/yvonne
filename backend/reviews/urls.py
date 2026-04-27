@@ -7,6 +7,7 @@ router = DefaultRouter()
 # Registering the review workflow
 router.register(r'reviews', WeeklyReviewViewSet)
 
+
 urlpatterns = [
     path('', include(router.urls)),
 ]
