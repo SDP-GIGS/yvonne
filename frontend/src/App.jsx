@@ -41,6 +41,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+
         <Routes>
           {/* Public Routes */}
           <Route element={<PublicLayout />}>
