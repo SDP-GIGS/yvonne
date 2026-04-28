@@ -24,7 +24,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('api/token/', include('users.urls')),#the login endpoint:send user name/password get access/refresh tokens
     #the refresh endpoint:use refresh token to get a new access token
-    path('admin/', admin.site.urls),
+git push    path('admin/', admin.site.urls),
     path('api/logs/', include('logs.urls')),
     path ('api/placements/',include('placements.urls')),
     path ('api/reviews/',include ('reviews.urls')),
