@@ -26,9 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
         #turning the password into unreadable string for safety
         user=CustomUser.objects.create_user(
             username=validate_data['username'],
-            email=validate_data['email'],
-            password=validate_data['password'],
-            role=validate_data['role']
+             password=validate_data['password'],
+            
         )
         return user
 class MyTOkenObtainPairSerializer(TokenObtainPairSerializer) :
