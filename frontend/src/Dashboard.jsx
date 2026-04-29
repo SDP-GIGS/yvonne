@@ -8,6 +8,7 @@ function Dashboard({ goHome,
   const userLogs = logs.filter(
     (log) => log.userId === currentUser.id
   );
+  
 
   return (
     <div style={{ padding: "20px" }}>
