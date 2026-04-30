@@ -4,7 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const SignUpPage = () => {
     const [formData, setFormData] = useState({
-        name: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         role: '',
@@ -12,12 +13,28 @@ const SignUpPage = () => {
 
     const navigate = useNavigate();
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
-        // Here you would typically send the formData to your backend API for registration
-        console.log('User Registered:', formData);
-        // After successful registration, navigate to the login page
-        navigate('/login');
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/users/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                navigate('/login');
+            } else {
+                const errorData = await response.json();
+                console.error('Registration failed:', errorData);
+                alert('Registration failed. Please check your details and try again.');
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('Something went wrong. Please try again later.');
+        }
     };
 
     return (
@@ -86,18 +103,35 @@ const SignUpPage = () => {
                                 </div>
 
                                 <form onSubmit={handleSignUp} className="space-y-5">
-                                    <div className="space-y-2">
-                                        <label className="ml-1 text-sm font-medium text-slate-200">Full Name</label>
-                                        <div className="relative group">
-                                            <User className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500 transition-colors group-focus-within:text-sky-300" />
-                                            <input
-                                                type="text"
-                                                placeholder="Enter your full name"
-                                                className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
-                                                value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                required
-                                            />
+                                    <div className="flex gap-4">
+                                        <div className="space-y-2 w-1/2">
+                                            <label className="ml-1 text-sm font-medium text-slate-200">First Name</label>
+                                            <div className="relative group">
+                                                <User className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500 transition-colors group-focus-within:text-sky-300" />
+                                                <input
+                                                    type="text"
+                                                    placeholder="First name"
+                                                    className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
+                                                    value={formData.first_name}
+                                                    onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-2 w-1/2">
+                                            <label className="ml-1 text-sm font-medium text-slate-200">Second Name</label>
+                                            <div className="relative group">
+                                                <User className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500 transition-colors group-focus-within:text-sky-300" />
+                                                <input
+                                                    type="text"
+                                                    placeholder="Second name"
+                                                    className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:bg-white/10 focus:ring-4 focus:ring-sky-400/10"
+                                                    value={formData.last_name}
+                                                    onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+                                                    required
+                                                />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -144,10 +178,10 @@ const SignUpPage = () => {
                                                 style={{ color: 'gray' }}
                                             >
                                                 <option value="">Select a role</option>
-                                                <option value="student">Student</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="workplacesupervisor">Workplace Supervisor</option>
-                                                <option value="academicadvisor">Academic Advisor</option>
+                                                <option value="STUDENT">Student</option>
+                                                <option value="ADMIN">Admin</option>
+                                                <option value="WORK_SUPERVISOR">Workplace Supervisor</option>
+                                                <option value="ACADEMIC_SUPERVISOR">Academic Advisor</option>
 
                                             </select>
                                         </div>

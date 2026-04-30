@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loginUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginUser(username, password);
+    await loginUser(email, password);
   };
 
   return (
@@ -38,14 +38,14 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              Username
+              Email Address
             </label>
             <input
-              type="username"
+              type="email"
               placeholder="name@cit.ac.ug"
               className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 text-black"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>

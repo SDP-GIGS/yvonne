@@ -4,6 +4,20 @@ import { useAuth } from "./context/AuthContext";
 function Navbar() {
   const { user, logoutUser } = useAuth();
 
+  const getDashboardLink = () => {
+    if (!user) return "/login";
+
+    switch (user.role) {
+      case "student":
+        return "/student/dashboard";
+      case "supervisor":
+        return "/supervisor/dashboard";
+      case "admin":
+        return "/admin/dashboard";
+      default:
+        return "/login";
+    }
+  };
 
   return (
     <header
@@ -31,7 +45,7 @@ function Navbar() {
         {user ? (
           <>
             <Link to={getDashboardLink()} style={{ color: "#e5e7eb", textDecoration: "none", fontWeight: "500", transition: "color 0.3s" }}>Dashboard</Link>
-            <button 
+            <button
               onClick={logoutUser}
               style={{ background: "none", border: "1px solid #334155", color: "#e5e7eb", padding: "6px 15px", borderRadius: "8px", cursor: "pointer", fontWeight: "500" }}
             >

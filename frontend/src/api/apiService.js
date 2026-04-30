@@ -25,9 +25,9 @@ api.interceptors.request.use(
 );
 
 export const authAPI = {
-  login: (credentials) => api.post('/api/token/', credentials),
-  register: (userData) => api.post('/api/users/', userData),
-  getProfile: () => api.get('/api/users/me/'),
+  login: (credentials) => api.post('/api/token/login/', credentials),
+  register: (userData) => api.post('/api/users/users/', userData),
+  getProfile: () => api.get('/api/users/users/me/'),
 };
 
 export const studentAPI = {

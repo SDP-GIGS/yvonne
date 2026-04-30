@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, Val, Lbl, GBtn } from "../../shared/ui";
+import {
+  COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
+  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, Val, Lbl, GBtn
+} from "../../shared/ui";
 import { useStudentDashboard } from "../../hooks/useData";
 
 export default function StudentDashboard() {
@@ -14,9 +16,9 @@ export default function StudentDashboard() {
 
   const me = data; // Mock hook returns student data directly
   const myLogs = data.logs || [];
-  const approved  = myLogs.filter(l => l.status === "Approved" || l.status === "ACCEPTED").length;
+  const approved = myLogs.filter(l => l.status === "Approved" || l.status === "ACCEPTED").length;
   const submitted = myLogs.filter(l => l.status === "Submitted").length;
-  const drafts    = myLogs.filter(l => l.status === "Draft" || l.status === "PENDING").length;
+  const drafts = myLogs.filter(l => l.status === "Draft" || l.status === "PENDING").length;
   const myPlacement = data.placements?.[0];
   const latestReview = [...myLogs].reverse().find(l => l.comment);
   const pending = myLogs.filter(l => l.status === "Draft").slice(0, 3);
@@ -34,9 +36,9 @@ export default function StudentDashboard() {
         </div>
       </div>
       <div className="flex gap-3 mb-5">
-        <StatCard label="Weeks Approved"     value={`${approved}/13`} sub="logs approved"       color="text-emerald-400" />
-        <StatCard label="Awaiting Review"    value={submitted}         sub="submitted logs"      color="text-blue-400"   />
-        <StatCard label="Pending"            value={drafts}            sub="draft / not started" color="text-amber-400"  />
+        <StatCard label="Weeks Approved" value={`${approved}/13`} sub="logs approved" color="text-emerald-400" />
+        <StatCard label="Awaiting Review" value={submitted} sub="submitted logs" color="text-blue-400" />
+        <StatCard label="Pending" value={drafts} sub="draft / not started" color="text-amber-400" />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <Card>
@@ -46,7 +48,7 @@ export default function StudentDashboard() {
           </div>
           {myPlacement ? (
             <div className="grid grid-cols-2 gap-2">
-              {[["Company", myPlacement.company],["Department", myPlacement.dept],["Supervisor", myPlacement.wpSup],["Period","Jun 2 – Aug 29"]].map(([k,v]) => (
+              {[["Company", myPlacement.company], ["Department", myPlacement.dept], ["Supervisor", myPlacement.wpSup], ["Period", "Jun 2 – Aug 29"]].map(([k, v]) => (
                 <div key={k}><Lbl>{k}</Lbl><Val>{v}</Val></div>
               ))}
             </div>
@@ -57,12 +59,12 @@ export default function StudentDashboard() {
           <div className="text-sm font-medium text-white mb-3">Logbook Progress</div>
           <div className="flex justify-between text-xs mb-1.5">
             <span className="text-slate-500">Completion</span>
-            <span className="text-white">{Math.round((approved/13)*100)}%</span>
+            <span className="text-white">{Math.round((approved / 13) * 100)}%</span>
           </div>
           <div className="h-1.5 bg-[#0B1120] rounded-full overflow-hidden mb-3">
-            <div className="h-full bg-amber-500 rounded-full" style={{width:`${(approved/13)*100}%`}} />
+            <div className="h-full bg-amber-500 rounded-full" style={{ width: `${(approved / 13) * 100}%` }} />
           </div>
-          {myLogs.slice(0,3).map(l => (
+          {myLogs.slice(0, 3).map(l => (
             <div key={l.id} className="flex justify-between items-center py-2 border-b border-[#1F2E4A] last:border-0">
               <span className="text-xs text-slate-400">Week {l.week} — {l.dateRange}</span>
               <Badge s={l.status} />
@@ -86,11 +88,11 @@ export default function StudentDashboard() {
           <div className="text-sm font-medium text-amber-400 mb-3">⚠ Action Required</div>
           {pending.length === 0 ? <p className="text-slate-500 text-xs">All caught up!</p>
             : pending.map(l => (
-            <div key={l.id} className="flex justify-between items-center bg-amber-900/10 rounded-lg px-3 py-2 mb-2">
-              <div><div className="text-xs text-white">Week {l.week} logbook</div><div className="text-[10px] text-slate-500">Due: {l.deadline}</div></div>
-              <GBtn onClick={() => navigate("logbook")} cls="!py-1 !px-3">Submit</GBtn>
-            </div>
-          ))}
+              <div key={l.id} className="flex justify-between items-center bg-amber-900/10 rounded-lg px-3 py-2 mb-2">
+                <div><div className="text-xs text-white">Week {l.week} logbook</div><div className="text-[10px] text-slate-500">Due: {l.deadline}</div></div>
+                <GBtn onClick={() => navigate("logbook")} cls="!py-1 !px-3">Submit</GBtn>
+              </div>
+            ))}
         </Card>
       </div>
     </PW>
