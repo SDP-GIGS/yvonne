@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useStudentDashboard, useAdminStats, useWorkplaceDashboard, useAcaDashboard } from '../hooks/useData';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Users, 
-  Building2, 
-  ClipboardCheck, 
-  UserCircle, 
-  LogOut, 
-  Menu, 
+import {
+  LayoutDashboard,
+  FileText,
+  Users,
+  Building2,
+  ClipboardCheck,
+  UserCircle,
+  LogOut,
+  Menu,
   X,
   FileSearch,
   BarChart3,
@@ -22,10 +22,9 @@ const SidebarLink = ({ to, icon: Icon, children, end = false }) => (
     to={to}
     end={end}
     className={({ isActive }) =>
-      `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-        isActive 
-          ? 'bg-amber-500 text-navy font-semibold shadow-lg shadow-amber-500/20' 
-          : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
+      `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${isActive
+        ? 'bg-amber-500 text-navy font-semibold shadow-lg shadow-amber-500/20'
+        : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
       }`
     }
   >
@@ -65,6 +64,7 @@ const roleLinks = {
   ],
 };
 
+
 const roleHooks = {
   STUDENT: useStudentDashboard,
   ADMIN: useAdminStats,
@@ -77,7 +77,7 @@ export default function DashboardShell({ role }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const links = roleLinks[role] || [];
   const navigate = useNavigate();
-  
+
   // Fetch data based on role
   const { data, loading, error } = (roleHooks[role] || (() => ({ data: null, loading: false })))();
 
@@ -86,9 +86,9 @@ export default function DashboardShell({ role }) {
     navigate('/login');
   };
 
-  const contextValue = { 
-    data, 
-    setData: () => {}, // Placeholder
+  const contextValue = {
+    data,
+    setData: () => { }, // Placeholder
     studentId: user?.id || 1,
     loading,
     error
@@ -97,7 +97,7 @@ export default function DashboardShell({ role }) {
   return (
     <div className="flex min-h-screen bg-[#0B1120] text-slate-200">
       {/* Mobile Sidebar Toggle */}
-      <button 
+      <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className="lg:hidden fixed bottom-6 right-6 z-50 p-4 bg-amber-500 text-navy rounded-full shadow-2xl"
       >
@@ -117,12 +117,23 @@ export default function DashboardShell({ role }) {
             </h1>
           </div>
 
-          <nav className="flex-1 space-y-2">
+          <nav className="flex-1 space-y-2 overflow-y-auto">
+            <div className="px-4 mb-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              Current Portal
+            </div>
             {links.map((link) => (
               <SidebarLink key={link.to} to={link.to} icon={link.icon} end={link.end}>
                 {link.label}
               </SidebarLink>
             ))}
+
+            <div className="mt-8 mb-2 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              Other Portals
+            </div>
+            {role !== 'STUDENT' && <SidebarLink to="/student" icon={Users} end={false}>Student Portal</SidebarLink>}
+            {role !== 'ADMIN' && <SidebarLink to="/admin" icon={Building2} end={false}>Admin Portal</SidebarLink>}
+            {role !== 'WORK_SUPERVISOR' && <SidebarLink to="/workplace" icon={ClipboardCheck} end={false}>Workplace Portal</SidebarLink>}
+            {role !== 'ACADEMIC_SUPERVISOR' && <SidebarLink to="/academic" icon={FileText} end={false}>Academic Portal</SidebarLink>}
           </nav>
 
           <div className="mt-auto pt-6 border-t border-slate-800">
@@ -135,7 +146,7 @@ export default function DashboardShell({ role }) {
                 <p className="text-xs text-slate-500 truncate">{user?.email || role?.toLowerCase() || 'portal'}</p>
               </div>
             </div>
-            <button 
+            <button
               onClick={handleLogout}
               className="flex items-center gap-3 w-full px-4 py-3 text-slate-400 hover:text-red-400 hover:bg-red-400/5 rounded-xl transition-colors group"
             >
@@ -161,7 +172,7 @@ export default function DashboardShell({ role }) {
 
       {/* Mobile Overlay */}
       {isSidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />

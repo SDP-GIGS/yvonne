@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { jwtDecode } from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -8,30 +8,30 @@ export const AuthProvider = ({ children }) => {
     const [authTokens, setAuthTokens] = useState(() =>
         localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null
     );
-    
+
     const [user, setUser] = useState(() =>
         localStorage.getItem('authTokens') ? jwtDecode(JSON.parse(localStorage.getItem('authTokens')).access) : null
     );
-    
+
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const loginUser = async (email, password) => {
+    const loginUser = async (username, password) => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/token/', {
+            const response = await fetch('http://127.0.0.1:8000/api/token/login/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ username, password })
             });
-            
+
             const data = await response.json();
-            
+
             if (response.status === 200) {
                 setAuthTokens(data);
                 const decodedUser = jwtDecode(data.access);
                 setUser(decodedUser);
                 localStorage.setItem('authTokens', JSON.stringify(data));
-                
+
                 // Navigate based on role
                 const role = decodedUser.role || 'STUDENT';
                 if (role === 'ADMIN') navigate('/admin-dashboard');
