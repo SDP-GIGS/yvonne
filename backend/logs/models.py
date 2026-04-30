@@ -47,6 +47,7 @@ class WeeklyLog(models.Model):
 
     class Meta:
         unique_together = ['student', 'week_number']
+        
 
     def __str__(self):
         return f"Week {self.week_number} - {self.student.username}" 
