@@ -14,6 +14,7 @@ class LogAccessTest(APITestCase):
         # Log in as Student A
         self.client.force_authenticate(user=self.student_a)
         
+        
         # Try to access the list of logs
         url = reverse('weeklylog-list') # This matches your router name
         response = self.client.get(url)
