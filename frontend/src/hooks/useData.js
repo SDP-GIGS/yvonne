@@ -27,6 +27,7 @@ const useFetchData = (apiCall, mockData) => {
 };
 
 // Student Hooks
+
 export const useStudentDashboard = () => useFetchData(studentAPI.getDashboard, {
   name: "John Doe",
   company: "Tech Solutions Ltd",
