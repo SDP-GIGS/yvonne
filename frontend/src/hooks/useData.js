@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { studentAPI, supervisorAPI, adminAPI } from '../api/apiService';
 
 const useFetchData = (apiCall, mockData) => {
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,6 +27,7 @@ const useFetchData = (apiCall, mockData) => {
 };
 
 // Student Hooks
+
 export const useStudentDashboard = () => useFetchData(studentAPI.getDashboard, {
   name: "John Doe",
   company: "Tech Solutions Ltd",
@@ -97,7 +99,7 @@ export const useAcaStudent = () => ({ data: {}, loading: false, error: null });
 export const useAcaStudentLogs = () => ({ data: [], loading: false, error: null });
 export const useAcaEvaluations = () => ({ data: [], loading: false, error: null });
 export const useEvalCriteria = () => ({ data: [], loading: false, error: null });
-export const useSubmitEvaluation = () => ({ mutate: () => {}, isLoading: false });
+export const useSubmitEvaluation = () => ({ mutate: () => { }, isLoading: false });
 
 // Workplace Supervisor placeholders/aliases
 export const useWPDashboard = useWorkplaceDashboard;
@@ -106,4 +108,4 @@ export const useWPStudent = () => ({ data: {}, loading: false, error: null });
 export const useWPStudentLogs = () => ({ data: [], loading: false, error: null });
 export const useReviewQueue = () => ({ data: [], loading: false, error: null });
 export const useWPLog = () => ({ data: {}, loading: false, error: null });
-export const useReviewLog = () => ({ mutate: () => {}, isLoading: false });
+export const useReviewLog = () => ({ mutate: () => { }, isLoading: false });
