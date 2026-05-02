@@ -3,6 +3,7 @@ from .views import UserViewSet, MyTokenObtainPairView, LogoutView, SupervisorApp
 from rest_framework_simplejwt.views import TokenRefreshView
 
 # User ViewSet Actions
+
 user_list = UserViewSet.as_view({
     'get': 'list',
     'post': 'create'
