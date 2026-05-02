@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
-import { Fragment } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardShell from "./components/DashboardShell";
@@ -41,19 +40,16 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-
         <Routes>
-          {/* Public Routes */}
+          {/* ── Public Routes ── */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
           </Route>
 
-          {/* Public Preview (Temporary) */}
-          <Route element={<Outlet />}>
-
-            {/* Student Portal */}
+          {/* ── Student Portal (RBAC: STUDENT only) ── */}
+          <Route element={<ProtectedRoute allowedRoles={["STUDENT"]} />}>
             <Route path="/student" element={<DashboardShell role="STUDENT" />}>
               <Route index element={<StudentDashboard />} />
               <Route path="logbook" element={<StudentLogbook />} />
@@ -61,9 +57,10 @@ function App() {
               <Route path="evaluation" element={<StudentEvaluation />} />
               <Route path="profile" element={<StudentProfile />} />
             </Route>
+          </Route>
 
-
-            {/* Admin Portal */}
+          {/* ── Admin Portal (RBAC: ADMIN only) ── */}
+          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
             <Route path="/admin" element={<DashboardShell role="ADMIN" />}>
               <Route index element={<AdminDashboardPage />} />
               <Route path="users" element={<AdminUsers />} />
@@ -73,38 +70,39 @@ function App() {
               <Route path="reports" element={<AdminReports />} />
               <Route path="profile" element={<AdminProfile />} />
             </Route>
+          </Route>
 
-            {/* Workplace Supervisor Portal */}
+          {/* ── Workplace Supervisor Portal (RBAC: WORK_SUPERVISOR only) ── */}
+          <Route element={<ProtectedRoute allowedRoles={["WORK_SUPERVISOR"]} />}>
             <Route path="/workplace" element={<DashboardShell role="WORK_SUPERVISOR" />}>
               <Route index element={<WorkplaceSupervisorDashboard />} />
               <Route path="students" element={<WSStudents />} />
               <Route path="review" element={<WSReviewQueue />} />
               <Route path="profile" element={<WSProfile />} />
             </Route>
+          </Route>
 
-            {/* Academic Supervisor Portal */}
+          {/* ── Academic Supervisor Portal (RBAC: ACADEMIC_SUPERVISOR only) ── */}
+          <Route element={<ProtectedRoute allowedRoles={["ACADEMIC_SUPERVISOR"]} />}>
             <Route path="/academic" element={<DashboardShell role="ACADEMIC_SUPERVISOR" />}>
               <Route index element={<AcaDashboardPage />} />
               <Route path="students" element={<AcaStudents />} />
               <Route path="evaluations" element={<AcaEvaluations />} />
               <Route path="profile" element={<AcaProfile />} />
             </Route>
-
-            {/* Legacy Dashboard Redirects */}
-            <Route path="/student-dashboard" element={<Navigate to="/student" replace />} />
-            <Route path="/admin-dashboard" element={<Navigate to="/admin" replace />} />
-            <Route path="/workplace-dashboard" element={<Navigate to="/workplace" replace />} />
-            <Route path="/academic-dashboard" element={<Navigate to="/academic" replace />} />
-
           </Route>
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* Legacy redirects */}
+          <Route path="/student-dashboard" element={<Navigate to="/student" replace />} />
+          <Route path="/admin-dashboard" element={<Navigate to="/admin" replace />} />
+          <Route path="/workplace-dashboard" element={<Navigate to="/workplace" replace />} />
+          <Route path="/academic-dashboard" element={<Navigate to="/academic" replace />} />
 
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
   );
 }
-
 
 export default App;
