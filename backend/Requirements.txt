@@ -5,5 +5,4 @@ djangorestframework-simplejwt
 PyJWT
 pytz
 sqlparse
-psycopg2-binary
-python-dontev
+python-dotenv

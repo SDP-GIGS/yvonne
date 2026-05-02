@@ -1,33 +1,14 @@
-"""
-URL configuration for iles_backend project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path,include
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from django.urls import path, include
 
 urlpatterns = [
-    path('api/token/', include('users.urls')),#the login endpoint:send user name/password get access/refresh tokens
-    #the refresh endpoint:use refresh token to get a new access token
     path('admin/', admin.site.urls),
+    # FIX: was duplicating users.urls under both api/token/ AND api/users/
+    # Now: token/auth endpoints live under api/token/, user CRUD under api/users/
+    path('api/token/', include('users.urls')),   # login, refresh, logout
+    path('api/users/', include('users.urls')),   # users CRUD, me, change_password
     path('api/logs/', include('logs.urls')),
-    path ('api/placements/',include('placements.urls')),
-    path ('api/reviews/',include ('reviews.urls')),
-    path('api/users/', include('users.urls')),
+    path('api/placements/', include('placements.urls')),
+    path('api/reviews/', include('reviews.urls')),
     path('api/evaluations/', include('evaluations.urls')),
 ]
