@@ -4,6 +4,7 @@ from .views import WeeklyReviewViewSet
 
 
 router = DefaultRouter()
+
 # Registering the review workflow
 router.register(r'reviews', WeeklyReviewViewSet)
 
