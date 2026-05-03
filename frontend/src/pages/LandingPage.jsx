@@ -1,6 +1,7 @@
 import Hero from "../Hero";
 import Features from "../Features";
 import PortalAccess from "../components/PortalAccess";
+import AdminAccessInfo from "../components/AdminAccessInfo";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
@@ -20,8 +21,10 @@ const LandingPage = () => {
         onExploreFeatures={scrollToFeatures}
       />
       <Features />
-      {/* RBAC portal access section — only visible when logged in */}
+      {/* Role-based portal access section */}
       <PortalAccess />
+      {/* Admin access instructions */}
+      <AdminAccessInfo />
     </>
   );
 };

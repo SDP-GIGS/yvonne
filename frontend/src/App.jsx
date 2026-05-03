@@ -4,7 +4,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardShell from "./components/DashboardShell";
 import PublicLayout from "./components/PublicLayout";
 
-
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/login/Login";
 import SignUpPage from "./pages/login/SignUpPage";

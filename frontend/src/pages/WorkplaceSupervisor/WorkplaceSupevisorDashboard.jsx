@@ -1,17 +1,22 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW } from "../../shared/ui";
-import { useWorkplaceDashboard } from "../../hooks/useData";
+import {
+  Card, PageWrap, StatCard, StatusBadge, GoldBtn, OutlineBtn,
+  LoadingSpinner, ErrorMsg, EmptyState, COLORS
+} from "../../shared/ui";
+import { useWorkplaceDashboard, useReviewQueue, useWPStudents } from "../../hooks/useData";
 
 export function WorkplaceSupervisorDashboard() {
   const navigate = useNavigate();
-  const { data: stats, loading, error } = useWorkplaceDashboard();
+  const { data: me,      loading: loadMe,    error: errMe }    = useWorkplaceDashboard();
+  const { data: queueRaw, loading: loadQ }                     = useReviewQueue();
+  const { data: studRaw,  loading: loadS }                     = useWPStudents();
 
-  if (loading) return <PW><LoadingSpinner /></PW>;
-  if (error)   return <PW><ErrorMsg message={error} /></PW>;
+  if (loadMe || loadQ || loadS) return <PageWrap><LoadingSpinner /></PageWrap>;
+  if (errMe) return <PageWrap><ErrorMsg message={errMe} /></PageWrap>;
 
-  const pending = stats?.review_queue || [];
+  const queue    = Array.isArray(queueRaw) ? queueRaw.filter(l => l.status === "SUBMITTED") : [];
+  const students = Array.isArray(studRaw)  ? studRaw.filter(u => u.role === "STUDENT")      : [];
+  const approved = Array.isArray(queueRaw) ? queueRaw.filter(l => l.status === "APPROVED").length : 0;
 
   return (
     <PageWrap>
@@ -19,34 +24,31 @@ export function WorkplaceSupervisorDashboard() {
         <div>
           <div style={{ fontSize: 13, color: COLORS.muted, marginBottom: 4 }}>Welcome back,</div>
           <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 26, color: COLORS.white, fontWeight: 400 }}>
-            {stats?.supervisor_name || "Supervisor"}
+            {me?.first_name} {me?.last_name}
           </h1>
+          <div style={{ fontSize: 11, color: COLORS.muted, marginTop: 2 }}>{me?.email}</div>
         </div>
       </div>
 
-      {/* Stats */}
       <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
-        <StatCard label="Assigned Students" value={stats?.total_students}    sub="under your supervision" accent={COLORS.white}   />
-        <StatCard label="Pending Review"    value={stats?.pending_reviews}   sub="logs awaiting review"   accent={COLORS.warning} />
-        <StatCard label="Approved This Week" value={stats?.approved_this_week} sub="logs approved"        accent={COLORS.success} />
-        <StatCard label="Total Reviewed"    value={stats?.total_reviewed}    sub="all time"               accent={COLORS.info}    />
+        <StatCard label="Assigned Students"  value={students.length} sub="under your supervision" accent={COLORS.white}   />
+        <StatCard label="Pending Review"     value={queue.length}    sub="logs awaiting review"   accent={COLORS.warning} />
+        <StatCard label="Approved This Week" value={approved}        sub="logs approved"           accent={COLORS.success} />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-
-        {/* Pending Review Queue */}
         <Card>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <div style={{ fontWeight: 500, fontSize: 14 }}>Pending Reviews</div>
             <OutlineBtn onClick={() => navigate("review")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
           </div>
-          {pending.length === 0
+          {queue.length === 0
             ? <EmptyState message="No logs pending review." />
-            : pending.slice(0, 4).map(item => (
+            : queue.slice(0, 4).map(item => (
               <div key={item.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: `1px solid ${COLORS.navyBorder}` }}>
                 <div>
-                  <div style={{ fontSize: 13, color: COLORS.white }}>{item.student_name}</div>
-                  <div style={{ fontSize: 11, color: COLORS.muted }}>Week {item.week_number} · Submitted {item.submitted_on}</div>
+                  <div style={{ fontSize: 13, color: COLORS.white }}>{item.student_email || item.student || "Student"}</div>
+                  <div style={{ fontSize: 11, color: COLORS.muted }}>Week {item.week_number} · {item.start_date}</div>
                 </div>
                 <GoldBtn onClick={() => navigate("review")} style={{ fontSize: 11, padding: "5px 12px" }}>Review</GoldBtn>
               </div>
@@ -54,23 +56,24 @@ export function WorkplaceSupervisorDashboard() {
           }
         </Card>
 
-        {/* My Students */}
         <Card>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <div style={{ fontWeight: 500, fontSize: 14 }}>My Students</div>
             <OutlineBtn onClick={() => navigate("students")} style={{ fontSize: 11, padding: "5px 12px" }}>View All</OutlineBtn>
           </div>
-          {(stats?.students || []).slice(0, 4).map(s => (
-            <div key={s.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: `1px solid ${COLORS.navyBorder}` }}>
-              <div>
-                <div style={{ fontSize: 13, color: COLORS.white }}>{s.name}</div>
-                <div style={{ fontSize: 11, color: COLORS.muted }}>{s.reg_number} · {s.department}</div>
+          {students.length === 0
+            ? <EmptyState message="No students assigned yet." />
+            : students.slice(0, 4).map(s => (
+              <div key={s.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: `1px solid ${COLORS.navyBorder}` }}>
+                <div>
+                  <div style={{ fontSize: 13, color: COLORS.white }}>{s.first_name} {s.last_name}</div>
+                  <div style={{ fontSize: 11, color: COLORS.muted }}>{s.email}</div>
+                </div>
+                <StatusBadge status={s.is_active ? "Active" : "Inactive"} />
               </div>
-              <StatusBadge status={s.placement_status} />
-            </div>
-          ))}
+            ))
+          }
         </Card>
-
       </div>
     </PageWrap>
   );

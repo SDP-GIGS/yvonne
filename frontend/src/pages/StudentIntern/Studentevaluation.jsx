@@ -1,47 +1,37 @@
-import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import { COLORS, Card, Label, Value, PageWrap, PageTitle, BackBtn, GoldBtn, OutlineBtn, DangerBtn,
-  StatCard, StatusBadge, Badge, LoadingSpinner, ErrorMsg, EmptyState, inputStyle, textareaStyle, PW, PT } from "../../shared/ui";
-import { authAPI } from "../../api/apiService";
+import { PW, PT, Card, StatCard, LoadingSpinner, ErrorMsg, EmptyState, Label, Value } from "../../shared/ui";
+import { useStudentEvaluations } from "../../hooks/useData";
 
 export default function StudentEvaluation() {
-  const { data: rawData, studentId } = useOutletContext();
-  const data = rawData || { evaluations: [], students: [] };
-  const ev = (data.evaluations || []).find(e => e.studentId === studentId);
-  if (!ev) return <PW><PT title="Evaluation & Scores" /><p className="text-slate-500 text-sm">No evaluation submitted yet.</p></PW>;
-  const scored = ev.criteria.filter(c => c.score !== null);
-  const total  = scored.reduce((s,c) => s+c.score, 0);
+  const { data: evalRaw, loading, error } = useStudentEvaluations();
+  const evaluations = Array.isArray(evalRaw) ? evalRaw : [];
+
+  if (loading) return <PW><LoadingSpinner /></PW>;
+  if (error)   return <PW><ErrorMsg message={error} /></PW>;
+
+  if (evaluations.length === 0) return (
+    <PW>
+      <PT title="Evaluation & Scores" sub="Performance review by supervisors" />
+      <EmptyState message="No evaluation has been submitted for you yet. Your supervisor will evaluate you at the end of your placement." />
+    </PW>
+  );
+
+  const ev = evaluations[0];
+
   return (
     <PW>
       <PT title="Evaluation & Scores" sub="Performance review by supervisors" />
-      <div className="grid grid-cols-4 gap-4 mb-5">
-        <StatCard label="Final Score" value={`${total}/100`} sub="cumulative weight" color="text-amber-400" />
-        <StatCard label="Grade"       value="A"           sub="academic standing" color="text-white"     />
-        <StatCard label="Status"      value="Completed"   sub="final assessment" color="text-emerald-400" />
-        <StatCard label="Review Date" value="Aug 30, 2026" sub="published on"    color="text-slate-500"  />
+      <div className="flex gap-3 mb-5">
+        <StatCard label="Final Score"  value={ev.total_score != null ? `${ev.total_score}/100` : '—'} sub="cumulative score" color="text-amber-400" accent="#f59e0b" />
+        <StatCard label="Grade"        value={ev.grade || '—'}           sub="academic standing"    color="text-white"     accent="#475569" />
+        <StatCard label="Status"       value="Evaluated"                 sub="final assessment"     color="text-emerald-400" accent="#10b981" />
+        <StatCard label="Submitted On" value={ev.created_at?.slice(0,10) || '—'} sub="evaluation date" color="text-slate-400" accent="#334155" />
       </div>
       <Card>
-        <div className="text-sm font-medium text-white mb-4">Detailed Performance Breakdown</div>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="border-b border-[#1F2E4A] text-left">
-              <th className="py-3 text-[10px] text-slate-500 uppercase tracking-widest">Criterion</th>
-              <th className="py-3 text-[10px] text-slate-500 uppercase tracking-widest text-center">Weight</th>
-              <th className="py-3 text-[10px] text-slate-500 uppercase tracking-widest text-center">Score</th>
-              <th className="py-3 text-[10px] text-slate-500 uppercase tracking-widest">Supervisor Feedback</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ev.criteria.map(c => (
-              <tr key={c.name} className="border-b border-[#1F2E4A]/50 last:border-0">
-                <td className="py-4 text-xs font-medium text-white">{c.name}</td>
-                <td className="py-4 text-xs text-slate-500 text-center">{c.weight}%</td>
-                <td className="py-4 text-xs font-bold text-amber-400 text-center">{c.score || "—"}</td>
-                <td className="py-4 text-xs text-slate-400 italic">"{c.comment || "Great performance in this area."}"</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="text-sm font-semibold text-white mb-3">Evaluation Details</div>
+        <div className="grid grid-cols-2 gap-4">
+          <div><Label>Evaluator</Label><Value>{ev.evaluator_name || ev.evaluator || '—'}</Value></div>
+          <div><Label>Comments</Label><Value>{ev.comments || ev.comment || 'No comments provided.'}</Value></div>
+        </div>
       </Card>
     </PW>
   );
