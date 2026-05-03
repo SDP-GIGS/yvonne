@@ -9,7 +9,7 @@ const AuthContext = createContext();
 const ROLE_ROUTES = {
   STUDENT: "/student",
   ADMIN: "/admin",
-  WORK_SUPERVISOR: "/supervisor",
+  WORK_SUPERVISOR: "/workplace",
   ACADEMIC_SUPERVISOR: "/academic",
 };
 
