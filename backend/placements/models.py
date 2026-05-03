@@ -7,13 +7,16 @@ class InternshipPlacement(models.Model):
     company_name = models.CharField(max_length=255)
     start_date = models.DateField()
     end_date = models.DateField()
+    department = models.CharField(max_length=255, blank = True, null = True)
+    status = models.CharField(max_length=20, default='pending')  # pending, approved, rejected
+    academic_supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='academic_interns')
     
     
     def __str__(self):
-        return f"{self.student.username} at {self.company_name}"
+        return f"{self.student.email} at {self.company_name}"
     
 
     
 
 
-# Create your models here.
+

@@ -3,9 +3,9 @@ from .models import InternshipPlacement # Assuming this is your model name
 
 class InternshipPlacementSerializer(serializers.ModelSerializer):
     # Using 'StringRelatedField' shows the names instead of just ID numbers
-    student = serializers.StringRelatedField(read_only=True)
-    academic_supervisor = serializers.StringRelatedField(read_only=True)
-    workplace_supervisor = serializers.StringRelatedField(read_only=True)
+    student_email= serializers.StringRelatedField(source='student.email')
+    academic_supervisor = serializers.ReadOnlyField(source='academic_supervisor.email')
+    workplace_supervisor_email = serializers.StringRelatedField(source='workplace_supervisor.email')
     
     
     

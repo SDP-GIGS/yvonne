@@ -10,9 +10,10 @@ class WeeklyLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeeklyLog
         fields = '__all__'
-        read_only_fields = ['student', 'status']
+        read_only_fields = ['student',]
 
     def validate_end_date(self, value):
-        if value > date.today():
+        from datetime import timedelta
+        if value > date.today() + timedelta(days=7):
             raise serializers.ValidationError("You cannot submit a log for a week that hasn't ended yet.")
         return value
