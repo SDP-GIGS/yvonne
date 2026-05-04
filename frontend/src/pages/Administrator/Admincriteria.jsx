@@ -1,16 +1,9 @@
 import { useState } from "react";
 import { PW, PT, GBtn, Table, DBtn, Modal, Inp, OBtn, EmptyState } from "../../shared/ui";
 
-const DEFAULT_CRITERIA = [
-  { id: 1, name: "Technical Skills",    weight: 30, desc: "Ability to apply technical knowledge in the workplace." },
-  { id: 2, name: "Professionalism",     weight: 20, desc: "Punctuality, dress code, and workplace etiquette." },
-  { id: 3, name: "Communication",       weight: 20, desc: "Written and verbal communication effectiveness." },
-  { id: 4, name: "Problem Solving",     weight: 15, desc: "Ability to identify and resolve challenges independently." },
-  { id: 5, name: "Teamwork",            weight: 15, desc: "Collaboration and contribution to group tasks." },
-];
 
 export default function AdminCriteria() {
-  const [criteria, setCriteria] = useState(DEFAULT_CRITERIA);
+  const [criteria, setCriteria] = useState([]);
   const [modal, setModal]       = useState(false);
   const [form, setForm]         = useState({ name: "", weight: "", desc: "" });
 
