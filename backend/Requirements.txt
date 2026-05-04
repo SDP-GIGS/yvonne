@@ -7,3 +7,4 @@ PyJWT
 pytz
 sqlparse
 dj-database-url
+psycopg2-binary
