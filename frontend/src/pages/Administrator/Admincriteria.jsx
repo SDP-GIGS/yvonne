@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { PW, PT, GBtn, Table, DBtn, Modal, Inp, OBtn, EmptyState } from "../../shared/ui";
 
-
 export default function AdminCriteria() {
   const [criteria, setCriteria] = useState([]);
   const [modal, setModal]       = useState(false);
