@@ -7,12 +7,12 @@ export default function StudentProfile() {
   const { data: me, loading, error, refetch } = useStudentDashboard();
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved]   = useState(false);
+  const [saved, setSaved] = useState(false);
   const [saveErr, setSaveErr] = useState("");
 
   if (loading) return <PW><LoadingSpinner /></PW>;
-  if (error)   return <PW><ErrorMsg message={error} /></PW>;
-  if (!me)     return null;
+  if (error) return <PW><ErrorMsg message={error} /></PW>;
+  if (!me) return null;
 
   const f = form || { first_name: me.first_name || "", last_name: me.last_name || "", email: me.email || "" };
 
@@ -30,6 +30,7 @@ export default function StudentProfile() {
       setSaving(false);
     }
   };
+
 
   const initials = `${me.first_name?.[0] || ""}${me.last_name?.[0] || ""}`.toUpperCase();
 
@@ -62,10 +63,10 @@ export default function StudentProfile() {
           <div className="text-sm font-medium text-amber-400 mb-4">Personal Information</div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Inp label="First Name" value={f.first_name} onChange={e => setForm({ ...f, first_name: e.target.value })} />
-            <Inp label="Last Name"  value={f.last_name}  onChange={e => setForm({ ...f, last_name: e.target.value })} />
-            <Inp label="Email"      value={f.email}       onChange={e => setForm({ ...f, email: e.target.value })} />
-            <Inp label="Role"       value={me.role || ""} disabled className="opacity-50" />
-            <Inp label="Programme"  value={me.programme_name || "—"} disabled className="opacity-50" />
+            <Inp label="Last Name" value={f.last_name} onChange={e => setForm({ ...f, last_name: e.target.value })} />
+            <Inp label="Email" value={f.email} onChange={e => setForm({ ...f, email: e.target.value })} />
+            <Inp label="Role" value={me.role || ""} disabled className="opacity-50" />
+            <Inp label="Programme" value={me.programme_name || "—"} disabled className="opacity-50" />
             <Inp label="Student No" value={me.student_number ? String(me.student_number) : "—"} disabled className="opacity-50" />
           </div>
           <GBtn onClick={handleSave} disabled={saving}>
