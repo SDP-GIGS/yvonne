@@ -7,6 +7,7 @@ import {
 import { studentAPI } from "../../api/apiService";
 import { useStudentLogs } from "../../hooks/useData";
 
+
 export default function StudentLogbook() {
   const { studentId } = useOutletContext();
   const { data: logsRaw, loading, error, refetch } = useStudentLogs();
