@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'placements',
     'users',
     'evaluations',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,4 @@ CSRF_TRUSTED_ORIGINS=[
     "https://yvonne.tagooledavid.com"
     "http://127.0.0.1:5173",
 ]
+
