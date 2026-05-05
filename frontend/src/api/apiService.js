@@ -29,10 +29,10 @@ api.interceptors.request.use(
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 export const authAPI = {
-  login:          (credentials) => api.post('/api/token/login/', credentials),
-  register:       (userData)    => api.post('/api/users/users/', userData),
-  getProfile:     ()            => api.get('/api/users/users/me/'),
-  logout:         (refreshToken)=> api.post('/api/token/logout/', { refresh: refreshToken }),
+  login:          (credentials) => api.post('/api/auth/jwt/create/', credentials),
+  register:       (userData)    => api.post('/api/auth/users/', userData),
+  getProfile:     ()            => api.get('/api/auth/users/users/me/'),
+  logout:         (refreshToken)=> api.post('/api/auth/jwt/blacklist/', { refresh: refreshToken }),
   changePassword: (data)        => api.post('/api/users/users/change_password/', data),
 };
 
