@@ -107,9 +107,8 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^http://127\.0\.0\.1:\d+$",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://insync-iles.pages.dev",
-]
+
+
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -127,12 +126,12 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #email notification system and settings
-EMAIL_BACKEND='django.core.email.backends.stmp.EmailBackend'
+EMAIL_BACKEND='django.core.mail.backends.stmp.EmailBackend'
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
@@ -141,12 +140,16 @@ EMAIL_HOST_PASSWORD='zvno dqmp gbsu zmev'
 
 CORS_ALLOWED_ORIGINS=[
     "https://insync-iles.pages.dev",
-    'https://yvonne.tagooledavid.com'
+    "https://insync-iles.pages.dev",
+    'https://yvonne.tagooledavid.com',
+    'http://localhost:5173',
+    'http://127.0.0.:5173',
 ]
 
 CSRF_TRUSTED_ORIGINS=[
     "https://insync-iles.pages.dev",
-    "https://yvonne.tagooledavid.com"
+    "https://yvonne.tagooledavid.com",
     "http://127.0.0.1:5173",
+    'http://localhost:5173',
 ]
 
