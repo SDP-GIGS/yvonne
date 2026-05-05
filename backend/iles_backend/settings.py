@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'placements',
     'users',
     'evaluations',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,15 @@ EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='alexmutsinzi2021@gmail.com'
 EMAIL_HOST_PASSWORD='zvno dqmp gbsu zmev'
+
+CORS_ALLOWED_ORIGINS=[
+    "https://insync-iles.pages.dev",
+    'https://yvonne.tagooledavid.com'
+]
+
+CSRF_TRUSTED_ORIGINS=[
+    "https://insync-iles.pages.dev",
+    "https://yvonne.tagooledavid.com"
+    "http://127.0.0.1:5173",
+]
+
