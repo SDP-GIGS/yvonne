@@ -17,3 +17,4 @@ class WeeklyLogSerializer(serializers.ModelSerializer):
         if value > date.today() + timedelta(days=7):
             raise serializers.ValidationError("You cannot submit a log for a week that hasn't ended yet.")
         return value
+    
