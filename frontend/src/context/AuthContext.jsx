@@ -13,6 +13,7 @@ const ROLE_ROUTES = {
 };
 
 export const AuthProvider = ({ children }) => {
+  
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -95,4 +96,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+
 export default AuthContext;
