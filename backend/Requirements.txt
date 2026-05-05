@@ -6,8 +6,6 @@ djangorestframework-simplejwt
 PyJWT
 pytz
 sqlparse
-<<<<<<< Updated upstream:backend/Requirements.txt
-=======
 dj-database-url
 psycopg2-binary
 gunicorn
@@ -15,4 +13,3 @@ gunicorn
 
 
 
->>>>>>> Stashed changes:backend/requirements.txt
