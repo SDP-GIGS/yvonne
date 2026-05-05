@@ -1,8 +1,4 @@
-/**
- * AdminAccessInfo — explains how to access the admin portal.
- * Shown on the landing page to all visitors (logged in or not).
- * Does NOT modify Hero.jsx or Features.jsx.
- */
+
 export default function AdminAccessInfo() {
   return (
     <section
@@ -76,43 +72,6 @@ export default function AdminAccessInfo() {
               </ol>
             </div>
           ))}
-        </div>
-
-        {/* Admin terminal callout */}
-        <div style={{
-          background: "rgba(245, 158, 11, 0.06)",
-          border: "1px solid rgba(245, 158, 11, 0.2)",
-          borderRadius: 14,
-          padding: "20px 24px",
-          display: "flex",
-          alignItems: "flex-start",
-          gap: 16,
-        }}>
-          <div style={{ fontSize: "1.2rem", marginTop: 2, flexShrink: 0 }}>⚠</div>
-          <div>
-            <div style={{ color: "#f59e0b", fontWeight: 600, fontSize: "0.9rem", marginBottom: 6 }}>
-              Admin accounts cannot self-register
-            </div>
-            <p style={{ color: "#94a3b8", fontSize: "0.85rem", margin: "0 0 10px", lineHeight: 1.7 }}>
-              For security, admin accounts must be created via the Django management terminal. Run this command inside the backend folder:
-            </p>
-            <code style={{
-              display: "block",
-              background: "#0b1120",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: 8,
-              padding: "10px 16px",
-              fontSize: "0.82rem",
-              color: "#a5f3fc",
-              fontFamily: "monospace",
-            }}>
-              python manage.py createsuperuser
-            </code>
-            <p style={{ color: "#64748b", fontSize: "0.8rem", margin: "8px 0 0", lineHeight: 1.6 }}>
-              You'll be prompted for email, first name, last name, and role. Type <strong style={{ color: "#f59e0b" }}>ADMIN</strong> for the role field (uppercase). Then log in at{" "}
-              <a href="/login" style={{ color: "#60a5fa" }}>/login</a>.
-            </p>
-          </div>
         </div>
       </div>
     </section>
