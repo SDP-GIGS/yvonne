@@ -129,3 +129,11 @@ SIMPLE_JWT = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#email notification system and settings
+EMAIL_BACKEND='django.core.email.backends.stmp.EmailBackend'
+EMAIL_HOST= 'smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER='alexmutsinzi2021@gmail.com'
+EMAIL_HOST_PASSWORD='zvno dqmp gbsu zmev'
