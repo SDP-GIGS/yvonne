@@ -5,3 +5,4 @@ from .models import InternshipPlacement
 # Register your models here.
 
 admin.site.register(InternshipPlacement)
+
