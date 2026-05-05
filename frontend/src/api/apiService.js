@@ -29,11 +29,14 @@ api.interceptors.request.use(
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 export const authAPI = {
-  login:          (credentials) => api.post('/api/token/login/', credentials),
-  register:       (userData)    => api.post('/api/users/users/', userData),
-  getProfile:     ()            => api.get('/api/users/users/me/'),
-  logout:         (refreshToken)=> api.post('/api/token/logout/', { refresh: refreshToken }),
-  changePassword: (data)        => api.post('/api/users/users/change_password/', data),
+
+login:          (credentials)  => api.post('/api/users/login/', credentials),
+refreshToken:   (refresh)      => api.post('/api/users/login/refresh/', { refresh }),
+logout:         (refreshToken) => api.post('/api/users/logout/', { refresh: refreshToken }),
+register:       (userData)     => api.post('/api/users/users/', userData),
+getProfile:     ()             => api.get('/api/users/users/me/'),
+changePassword: (data)         => api.post('/api/users/change_password/', data),
+
 };
 
 // ── Student ───────────────────────────────────────────────────────────────────
@@ -43,7 +46,7 @@ export const studentAPI = {
   submitLog:      (data)     => api.post('/api/logs/', data),
   updateLog:      (id, data) => api.patch(`/api/logs/${id}/`, data),
   deleteLog:      (id)       => api.delete(`/api/logs/${id}/`),
-  getPlacements:  ()         => api.get('/api/placements/'),
+  getPlacements:  ()         => api.get('/api/placements/placements/'),
   getEvaluations: ()         => api.get('/api/evaluations/'),
 };
 
@@ -52,8 +55,8 @@ export const supervisorAPI = {
   getDashboard:     ()                  => api.get('/api/users/users/me/'),
   getStudents:      ()                  => api.get('/api/users/users/'),
   getReviewQueue:   ()                  => api.get('/api/logs/'),
-  reviewLog:        (logId, reviewData) => api.post('/api/reviews/', { log: logId, ...reviewData }),
-  submitEvaluation: (data)              => api.post('/api/evaluations/', data),
+  reviewLog:        (logId, reviewData) => api.post('/api/reviews/reviews', { log: logId, ...reviewData }),
+  submitEvaluation: (data)              => api.post('/api/evaluations/academic-evals', data),
 };
 
 // ── Admin ─────────────────────────────────────────────────────────────────────
@@ -61,7 +64,8 @@ export const adminAPI = {
   getUsers:                  ()     => api.get('/api/users/users/'),
   getLogs:                   ()     => api.get('/api/logs/'),
   getPlacements:             ()     => api.get('/api/placements/placements/'),
-  assignPlacement:           (data) => api.post('/api/placements/placements/', data),
+
+  assignPlacement:           (data) => api.post('/api/placements/', data),
   getSupervisorApplications: ()     => api.get('/api/users/supervisor-applications/'),
   approveApplication:        (id)   => api.post(`/api/users/supervisor-applications/${id}/approve/`),
   rejectApplication:         (id)   => api.post(`/api/users/supervisor-applications/${id}/reject/`),
