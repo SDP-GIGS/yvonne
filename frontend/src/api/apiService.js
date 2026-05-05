@@ -43,7 +43,7 @@ export const studentAPI = {
   submitLog:      (data)     => api.post('/api/logs/', data),
   updateLog:      (id, data) => api.patch(`/api/logs/${id}/`, data),
   deleteLog:      (id)       => api.delete(`/api/logs/${id}/`),
-  getPlacements:  ()         => api.get('/api/placements/placements/'),
+  getPlacements:  ()         => api.get('/api/placements/'),
   getEvaluations: ()         => api.get('/api/evaluations/'),
 };
 
