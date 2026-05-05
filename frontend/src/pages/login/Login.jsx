@@ -12,16 +12,35 @@ const LoginPage = () => {
   const location = useLocation();
   const justRegistered = location.state?.registered;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    const result = await loginUser(email, password);
+  //const handleSubmit = async (e) => {
+    //e.preventDefault();
+    //setError('');
+    //setLoading(true);
+    //const result = await loginUser(email, password);
+    //setLoading(false);
+    //if (!result.success) {
+    //  setError(result.message);
+    //}
+  //};
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setLoading(true);
+
+  try {
+    // Send 'email' as the key to match what your backend is asking for
+    await loginUser({ email: email, password: password }); 
+    
+  } catch (err) {
+    // Check if the backend sent a specific error message
+    const serverMessage = err.response?.data?.detail || 
+                         err.response?.data?.non_field_errors?.[0] || 
+                         "Invalid email or password.";
+    setError(serverMessage);
+  } finally {
     setLoading(false);
-    if (!result.success) {
-      setError(result.message);
-    }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
