@@ -12,6 +12,7 @@ class InternshipPlacement(models.Model):
     academic_supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='academic_interns')
     
     
+    
     def __str__(self):
         return f"{self.student.email} at {self.company_name}"
     
