@@ -3,7 +3,6 @@ from django.dispatch import receiver
 from django.core.mail import send_mail
 from .models import WeeklyLog
 
-
 @receiver(post_save,sender=WeeklyLog)
 def notify_students_status(sender, instance,created, **kwargs):
   if not created:
