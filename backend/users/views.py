@@ -28,6 +28,21 @@ class UserViewSet(viewsets.ModelViewSet):
         # lets try something so that by mistake the user role is not in the system does not crash
         if getattr(user, "role", None) == "ADMIN":
             return CustomUser.objects.all()
+
+        if getattr(user, "role", None) == 'WORK_SUPERVISOR':
+            from placements.models import InternshipPlacement
+            student_ids = InternshipPlacement.objects.filter(
+                workplace_supervisor=user
+            ).values_list('student_id', flat=True)
+            return CustomUser.objects.filter(id__in=student_ids)
+
+        if getattr(user, "role", None) == 'ACADEMIC_SUPERVISOR':
+            from placements.models import InternshipPlacement
+            student_ids = InternshipPlacement.objects.filter(
+                academic_supervisor=user
+            ).values_list('student_id', flat=True)
+            return CustomUser.objects.filter(id__in=student_ids)
+
         return CustomUser.objects.filter(id=self.request.user.id)
 
     def get_permissions(self):
