@@ -167,7 +167,7 @@ export default function DashboardShell({ role }) {
 
       {/* Main Content */}
       <main className="flex-1 min-w-0 overflow-auto">
-        <div className="p-4 lg:p-8 max-w-7xl mx-auto">
+        <div className="p-4 lg:p-8 w-full max-w-full overflow-x-hidden">
           {loading ? (
             <div className="flex items-center justify-center h-64">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
@@ -178,6 +178,7 @@ export default function DashboardShell({ role }) {
         </div>
       </main>
 
+      
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
