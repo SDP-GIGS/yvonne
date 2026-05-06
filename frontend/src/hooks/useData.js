@@ -73,10 +73,53 @@ export const useAcaEvaluations = () => useFetchData(studentAPI.getEvaluations);
 
 // ── Aliases and placeholders ──────────────────────────────────────────────────
 export const useWPDashboard = useWorkplaceDashboard;
-export const useAcaStudent = () => ({ data: null, loading: false, error: null, refetch: () => {} });
-export const useAcaStudentLogs = () => ({ data: [], loading: false, error: null, refetch: () => {} });
-export const useEvalCriteria = () => ({ data: [], loading: false, error: null, refetch: () => {} });
-export const useSubmitEvaluation = () => ({ mutate: () => {}, isLoading: false });
+
+export const useAcaStudent = (studentId) =>
+  useFetchData(() => supervisorAPI.getStudent(studentId));
+
+export const useAcaStudentLogs = (studentId) =>
+  useFetchData(() => api.get(`/api/logs/?student=${studentId}`));
+
+export const useEvalCriteria = () => ({
+  data: [
+    { id: 'organization_score', name: 'Organisation & Conduct',  weight: 40 },
+    { id: 'logbook_score',      name: 'Logbook Quality',         weight: 30 },
+    { id: 'final_report_score', name: 'Final Report',            weight: 30 },
+  ],
+  loading: false,
+  error: null,
+  refetch: () => {},
+});
+
+export const useSubmitEvaluation = () => {
+  const [loading, setLoading] = useState(false);
+  const [error,   setError  ] = useState(null);
+
+  const mutate = async (payload) => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Map the frontend payload to the backend's field names
+      const backendPayload = {
+        placement:            payload.placement_id,
+        organization_score:   payload.scores.find(s => s.criterion_id === 'organization_score')?.score ?? 0,
+        logbook_score:        payload.scores.find(s => s.criterion_id === 'logbook_score')?.score ?? 0,
+        final_report_score:   payload.scores.find(s => s.criterion_id === 'final_report_score')?.score ?? 0,
+        comments:             payload.comment,
+      };
+      await supervisorAPI.submitEvaluation(backendPayload);
+      return true;
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Failed to submit evaluation.');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { mutate, loading, error };
+};
+
 export const useWPStudent = () => ({ data: null, loading: false, error: null, refetch: () => {} });
 export const useWPStudentLogs = () => ({ data: [], loading: false, error: null, refetch: () => {} });
 
