@@ -58,6 +58,9 @@ export const supervisorAPI = {
   getLog:           (id)                => api.get(`/api/logs/${id}/`),
   reviewLog:        (logId, reviewData) => api.post('/api/reviews/reviews/', { log: logId, ...reviewData }),
   submitEvaluation: (data)              => api.post('/api/evaluations/academic-evals', data),
+  getStudent:       (id)                => api.get(`/api/users/users/${id}/`),
+  getStudentLogs:   (studentId)         => api.get(`/api/logs/?student=${studentId}`),
+  getStudentPlacement: (studentId) => api.get(`/api/placements/placements/?student=${studentId}`)
 };
 
 // ── Admin ─────────────────────────────────────────────────────────────────────
