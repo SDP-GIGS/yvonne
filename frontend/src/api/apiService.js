@@ -5,7 +5,7 @@ import axios from 'axios';
 const baseURL =
   window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:8000'
-    : 'https://yvonne.tagooledavid.com';
+    : 'https://yvonne-api.tagooledavid.com';
 
 const api = axios.create({
   baseURL,
