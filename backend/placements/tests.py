@@ -4,6 +4,7 @@ from rest_framework import status
 from users.models import CustomUser
 from .models import InternshipPlacement
 
+
 class PlacementTests(APITestCase):
     def setUp(self):
         self.admin = CustomUser.objects.create_superuser(username="admin", password="password123", role="ADMIN")
