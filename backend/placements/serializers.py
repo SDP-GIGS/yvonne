@@ -8,7 +8,6 @@ class InternshipPlacementSerializer(serializers.ModelSerializer):
     workplace_supervisor_email = serializers.StringRelatedField(source='workplace_supervisor.email')
     
     
-    
     class Meta:
         model = InternshipPlacement
         fields = '__all__'
