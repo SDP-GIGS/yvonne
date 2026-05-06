@@ -6,3 +6,4 @@ from .models import InternshipPlacement
 
 admin.site.register(InternshipPlacement)
 
+
