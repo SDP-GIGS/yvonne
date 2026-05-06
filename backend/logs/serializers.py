@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import WeeklyLog
 from datetime import date
 
-
 class WeeklyLogSerializer(serializers.ModelSerializer):
     student_name = serializers.ReadOnlyField(source='student.get_full_name')
 
