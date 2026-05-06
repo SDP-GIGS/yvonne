@@ -21,15 +21,15 @@ export function AcaEvaluationFormPage({ studentId, onBack, onDone }) {
 
   const allFilled = (criteria || []).every(c => scores[c.id] !== undefined && scores[c.id] !== "");
 
-  const handleSubmit = async () => {
-    const payload = {
-      student_id: studentId,
-      scores: (criteria || []).map(c => ({ criterion_id: c.id, score: parseFloat(scores[c.id]) })),
-      comment,
-    };
-    const result = await submitEvaluation(payload);
-    if (result) onDone?.();
+const handleSubmit = async () => {
+  const payload = {
+    placement_id: student?.placement_id,   // ← needs to come from the student fetch
+    scores: (criteria || []).map(c => ({ criterion_id: c.id, score: parseFloat(scores[c.id]) })),
+    comment,
   };
+  const result = await submitEvaluation(payload);
+  if (result) onDone?.();
+};
 
   if (loading) return <PageWrap><BackBtn onClick={onBack} /><LoadingSpinner /></PageWrap>;
 
