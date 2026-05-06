@@ -63,20 +63,16 @@ export default function StudentLogbook() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this log entry?")) return;
-    try {
-      await studentAPI.updateLog(id, { status: "DRAFT" });
-      // Actually delete
-      const resp = await fetch(`http://localhost:8000/api/logs/${id}/`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("authTokens")).access}` }
-      });
-      if (resp.ok) await refetch();
-    } catch {
-      await refetch();
-    }
-  };
+const handleDelete = async (id) => {
+  if (!window.confirm('Delete this log entry?')) return;
+  try {
+    await studentAPI.deleteLog(id);
+    await refetch();
+  } catch (err) {
+    console.error('Delete failed:', err);
+    await refetch();
+  }
+};
 
   if (loading) return <PW><LoadingSpinner /></PW>;
   if (error) return <PW><ErrorMsg message={error} /></PW>;
