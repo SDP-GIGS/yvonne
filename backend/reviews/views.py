@@ -4,11 +4,11 @@ from rest_framework.permissions import IsAuthenticated
 from .models import SupervisorReview
 from .serializers import SupervisorReviewSerializer
 
-
 class WeeklyReviewViewSet(viewsets.ModelViewSet):
     queryset = SupervisorReview.objects.all()
     serializer_class = SupervisorReviewSerializer
     permission_classes = [IsAuthenticated]
+    
     
 
     def perform_create(self, serializer):
