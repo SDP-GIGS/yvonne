@@ -5,6 +5,7 @@ from users.models import CustomUser
 from logs.models import WeeklyLog
 from placements.models import InternshipPlacement
 
+
 class ReviewTests(APITestCase):
     def setUp(self):
         self.supervisor = CustomUser.objects.create_user(username="sup", role="SUPERVISOR")
