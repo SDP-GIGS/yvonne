@@ -14,6 +14,7 @@ class IsAcademicSupervisor(permissions.BasePermission):
             request.user.is_authenticated
             and request.user.role == CustomUser.ACADEMIC_SUPERVISOR
         )
+    
 
 
 class IsWorkSupervisor(permissions.BasePermission):

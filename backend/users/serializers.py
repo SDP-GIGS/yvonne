@@ -17,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id', 'email', 'first_name', 'last_name',
             'role', 'password', 'role_display', 'tokens'
         ]
+        
 
     def get_tokens(self, user):
         # Only generate tokens for newly created users (POST), not on GET/LIST
