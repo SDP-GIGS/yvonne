@@ -79,5 +79,26 @@ export const useEvalCriteria = () => ({ data: [], loading: false, error: null, r
 export const useSubmitEvaluation = () => ({ mutate: () => {}, isLoading: false });
 export const useWPStudent = () => ({ data: null, loading: false, error: null, refetch: () => {} });
 export const useWPStudentLogs = () => ({ data: [], loading: false, error: null, refetch: () => {} });
-export const useWPLog = () => ({ data: null, loading: false, error: null, refetch: () => {} });
-export const useReviewLog = () => ({ mutate: () => {}, isLoading: false });
+
+export const useWPLog = (logId) => useFetchData(() => supervisorAPI.getLog(logId));
+
+export const useReviewLog = () => {
+  const [loading, setLoading] = useState(false);
+  const [error,   setError  ] = useState(null);
+
+  const mutate = async (logId, reviewData) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await supervisorAPI.reviewLog(logId, reviewData);
+      return true;
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Failed to submit review.');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { mutate, loading, error };
+};

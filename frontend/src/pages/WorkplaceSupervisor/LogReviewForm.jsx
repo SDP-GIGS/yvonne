@@ -64,12 +64,12 @@ export function WPLogReviewPage({ logId, onBack, onDone }) {
             />
             <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
               <OutlineBtn
-                onClick={() => setDecision("Reviewed")}
-                style={{ flex: 1, border: decision === "Reviewed" ? `1px solid ${COLORS.gold}` : undefined, background: decision === "Reviewed" ? "#1A2A15" : undefined }}
+                onClick={() => setDecision("REVIEWED")}
+                style={{ flex: 1, border: decision === "REVIEWED" ? `1px solid ${COLORS.gold}` : undefined, background: decision === "Reviewed" ? "#1A2A15" : undefined }}
               >Mark as Reviewed</OutlineBtn>
               <GoldBtn
-                onClick={() => setDecision("Approved")}
-                style={{ flex: 1, background: decision === "Approved" ? COLORS.success : undefined, color: decision === "Approved" ? COLORS.navy : undefined }}
+                onClick={() => setDecision("APPROVED")}
+                style={{ flex: 1, background: decision === "APPROVED" ? COLORS.success : undefined, color: decision === "Approved" ? COLORS.navy : undefined }}
               >Approve</GoldBtn>
             </div>
             {decision && (
