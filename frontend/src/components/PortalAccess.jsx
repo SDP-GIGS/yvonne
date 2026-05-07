@@ -97,6 +97,7 @@ export default function PortalAccess() {
   if (!myPortal) return null;
   const Icon = myPortal.icon;
 
+  
   return (
     <section
       id="portal-access"
@@ -139,6 +140,7 @@ export default function PortalAccess() {
             <p style={{ color: "#94a3b8", fontSize: "0.9rem", margin: 0 }}>{myPortal.description}</p>
           </div>
           <button
+            
             onClick={() => navigate(myPortal.route)}
             style={{
               display: "inline-flex",
