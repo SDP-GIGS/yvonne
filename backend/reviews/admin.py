@@ -6,3 +6,5 @@ from .models import SupervisorReview
 
 
 admin.site.register(SupervisorReview)
+
+

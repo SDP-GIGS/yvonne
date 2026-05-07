@@ -55,3 +55,5 @@ class IsOwnerOrAdmin(permissions.BasePermission):
             return True
         # return True if user is the object's owner
         return obj.user == request.user
+
+

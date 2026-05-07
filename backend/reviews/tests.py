@@ -26,3 +26,5 @@ class ReviewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 # Create your tests here.
+
+
