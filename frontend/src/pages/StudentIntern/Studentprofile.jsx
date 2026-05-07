@@ -14,7 +14,7 @@ export default function StudentProfile() {
   if (error) return <PW><ErrorMsg message={error} /></PW>;
   if (!me) return null;
 
-  const f = form || { first_name: me.first_name || "", last_name: me.last_name || "", email: me.email || "" };
+  const f = form || { first_name: me.first_name || "", last_name: me.last_name || "", email: me.email || "",programme_name: me.programme_name || "", student_number: me.student_number || ""? String(me.student_number) : "" };
 
   const handleSave = async () => {
     setSaving(true);
@@ -66,8 +66,8 @@ export default function StudentProfile() {
             <Inp label="Last Name" value={f.last_name} onChange={e => setForm({ ...f, last_name: e.target.value })} />
             <Inp label="Email" value={f.email} onChange={e => setForm({ ...f, email: e.target.value })} />
             <Inp label="Role" value={me.role || ""} disabled className="opacity-50" />
-            <Inp label="Programme" value={me.programme_name || "—"} disabled className="opacity-50" />
-            <Inp label="Student No" value={me.student_number ? String(me.student_number) : "—"} disabled className="opacity-50" />
+            <Inp label="Programme" value={f.programme_name} onChange={e => setForm({ ...f, programme_name: e.target.value })} />
+            <Inp label="Student No" value={f.student_number} onChange={e => setForm({ ...f, student_number: e.target.value })} />
           </div>
           <GBtn onClick={handleSave} disabled={saving}>
             {saving ? "Saving..." : "Save Changes"}
