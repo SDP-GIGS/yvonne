@@ -10,3 +10,4 @@ router.register(r'placements', InternshipPlacementViewSet)
 urlpatterns = [
     path('', include(router.urls)), # Square brackets [] hold the list of paths
 ]
+
