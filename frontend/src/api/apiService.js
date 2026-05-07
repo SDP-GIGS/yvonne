@@ -69,10 +69,11 @@ export const adminAPI = {
   getLogs:                   ()     => api.get('/api/logs/'),
   getPlacements:             ()     => api.get('/api/placements/placements/'),
 
-  assignPlacement:           (data) => api.post('/api/placements/', data),
+  assignPlacement:           (data) => api.post('/api/placements/placements/', data),
   getSupervisorApplications: ()     => api.get('/api/users/supervisor-applications/'),
   approveApplication:        (id)   => api.post(`/api/users/supervisor-applications/${id}/approve/`),
   rejectApplication:         (id)   => api.post(`/api/users/supervisor-applications/${id}/reject/`),
+  deletePlacement: (id) => api.delete(`/api/placements/placements/${id}/`),
 };
 
 export default api;
