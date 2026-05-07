@@ -57,9 +57,14 @@ export default function AdminLogs() {
           <Table
             headers={["Student", "Week", "Period", "Status", "Override Status", "Actions"]}
             rows={filtered.map(l => [
-              <div>
-                <div className="text-xs font-medium text-white">{l.student_email || l.student || "—"}</div>
-                <div className="text-[10px] text-slate-500">Week {l.week_number}</div>
+              <div key={l.id}>
+                <div className="text-xs font-medium text-white">
+                    {l.student_name || l.student_email || `Student #${l.student}`}
+                </div>
+
+                <div className="text-[10px] text-slate-500">
+                  {l.student_email || ""}
+                </div>
               </div>,
               <span className="text-xs text-white">Week {l.week_number}</span>,
               <span className="text-xs text-slate-400">{l.start_date} → {l.end_date}</span>,
