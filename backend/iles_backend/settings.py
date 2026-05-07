@@ -136,7 +136,7 @@ EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='alexmutsinzi2021@gmail.com'
-EMAIL_HOST_PASSWORD='zvno dqmp gbsu zmev'
+EMAIL_HOST_PASSWORD='zvnodqmpgbsuzmev'
 
 CORS_ALLOWED_ORIGINS=[
     "https://insync-iles.pages.dev",

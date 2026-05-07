@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets ,status
 from rest_framework.permissions import IsAuthenticated
 from .models import WeeklyLog
 from .serializers import WeeklyLogSerializer
 from rest_framework.exceptions import ValidationError
+from rest_framework .response import Response
+from rest_framework.decorators import action
+
+
 
 
 class WeeklyLogViewSet(viewsets.ModelViewSet):
@@ -59,3 +63,18 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
             raise ValidationError("You cannot delete a log that has been approved.")
 
         instance.delete()
+
+
+    @action(detail= True , methods=['post'])
+    def approve_log_view(self, request, pk=None):
+        log=self.get_object()
+
+        log.status= "Approved"
+        log.save()
+
+        return Response({'status': 'log approved and student notified'}, status=status.HTTP_200_OK)
+
+
+
+        
+
