@@ -36,15 +36,17 @@ export default function AdminPlacements() {
     }
   };
 
-  const handleRemove = async (id) => {
-    if (!window.confirm("Remove this placement?")) return;
-    try {
-      await api.delete(`/api/placements/${id}/`);
-      await refetchP();
-    } catch (err) {
-      alert(err.response?.data?.detail || "Failed to remove placement.");
-    }
-  };
+const handleRemove = async (id) => {
+  if (!window.confirm("Remove this placement?")) return;
+
+  try {
+    await adminAPI.deletePlacement(id);
+    await refetchP();
+  } catch (err) {
+    console.error(err);
+    alert(err.response?.data?.detail || "Failed to remove placement.");
+  }
+};
 
   if (loadP || loadU) return <PW><LoadingSpinner /></PW>;
   if (errP)           return <PW><ErrorMsg message={errP} /></PW>;
