@@ -5,3 +5,5 @@ from .models import AcademicEvaluation
 # Register your models here.
 admin.site.register(AcademicEvaluation)
 
+
+
