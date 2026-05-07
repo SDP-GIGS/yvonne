@@ -19,3 +19,6 @@ class EvaluationLogicTest(TestCase):
         # 32 + 21 + 27 = 80
         self.assertEqual(eval.calculate_final_grade, 80.0)
 # Create your tests here.
+
+
+
