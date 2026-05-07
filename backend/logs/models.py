@@ -50,3 +50,5 @@ class WeeklyLog(models.Model):
     def __str__(self):
         # FIX: was student.username but USERNAME_FIELD is email
         return f"Week {self.week_number} - {self.student.email}"
+
+
