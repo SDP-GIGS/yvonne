@@ -112,11 +112,13 @@ export default function AdminPlacements() {
           rows={placements.map(p => [
             <div>
               <div className="text-xs font-medium text-white">
-                {p.student_name || p.student || "—"}
+                {p.student_name || p.student_email || `Student #${p.student}`}
               </div>
+
               <div className="text-[10px] text-slate-500">
                 {p.student_email || ""}
               </div>
+
             </div>,
 
             <span className="text-xs text-slate-400">
