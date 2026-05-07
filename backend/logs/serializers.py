@@ -26,3 +26,5 @@ class WeeklyLogSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
         read_only_fields = ["student"]
+
+        
