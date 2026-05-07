@@ -24,8 +24,17 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
             return WeeklyLog.objects.filter(Academic_supervisor=user)
         return WeeklyLog.objects.none()
 
-    def perform_create(self, serializer):
-        serializer.save(student=self.request.user)
+def perform_create(self, serializer):
+    student = self.request.user
+
+    # Get student's placement
+    placement = getattr(student, 'placement', None)
+
+    serializer.save(
+        student=student,
+        placement_supervisor=placement.workplace_supervisor if placement else None,
+        Academic_supervisor=placement.academic_supervisor if placement else None
+    )
 
     def perform_update(self, serializer):
         instance = self.get_object()
