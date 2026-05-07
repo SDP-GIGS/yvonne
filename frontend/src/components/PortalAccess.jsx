@@ -97,6 +97,7 @@ export default function PortalAccess() {
   if (!myPortal) return null;
   const Icon = myPortal.icon;
 
+  
   return (
     <section
       id="portal-access"
