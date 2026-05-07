@@ -9,3 +9,5 @@ class EvaluationSerializer(serializers.ModelSerializer):
     class Meta:
         model = AcademicEvaluation
         fields = ['id', 'placement', 'organization_score', 'logbook_score', 'final_report_score', 'final_score', 'comments']
+
+        

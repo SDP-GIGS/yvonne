@@ -43,7 +43,6 @@ const SignUpPage = () => {
                     <aside className="relative hidden flex-col justify-between border-r border-white/10 p-10 lg:flex">
                         <div className="space-y-8">
                             <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm text-sky-100">
-                                <Sparkles className="h-4 w-4" />
                                 Student internship platform
                             </div>
                             <div className="space-y-4">
