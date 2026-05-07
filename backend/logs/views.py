@@ -21,15 +21,17 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
         if user.role == 'STUDENT':
             return WeeklyLog.objects.filter(student=user)
 
-        # FIX: was 'SUPERVISOR' — correct value is 'WORK_SUPERVISOR'
         if user.role == 'WORK_SUPERVISOR':
-            return WeeklyLog.objects.filter(placement_supervisor=user)
-
+            return WeeklyLog.objects.filter(
+                student__placement__workplace_supervisor=user
+            )
         if user.role == 'ADMIN':
             return WeeklyLog.objects.all()
 
         if user.role == 'ACADEMIC_SUPERVISOR':
-            return WeeklyLog.objects.filter(Academic_supervisor=user)
+            return WeeklyLog.objects.filter(
+                student__placement__academic_supervisor=user
+            )
 
         return WeeklyLog.objects.none()
 
