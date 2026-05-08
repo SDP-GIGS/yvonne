@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 function Hero({ onPrimaryAction, onSecondaryAction, onExploreFeatures }) {
+
   return (
     <section className="relative overflow-hidden bg-slate-950 px-4 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(37,99,235,0.16),_transparent_30%)]" />
@@ -78,7 +79,7 @@ function Hero({ onPrimaryAction, onSecondaryAction, onExploreFeatures }) {
                       ))}
                     </div>
                   </div>
-                  
+
                   {/* Main Content */}
                   <div className="flex-1 p-4 sm:p-5 overflow-hidden flex flex-col gap-3">
                     <div className="flex justify-between items-start mb-1">
