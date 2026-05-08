@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
+
 function Hero({ onPrimaryAction, onSecondaryAction, onExploreFeatures }) {
 
   return (
