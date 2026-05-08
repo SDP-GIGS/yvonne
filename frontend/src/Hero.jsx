@@ -9,7 +9,7 @@ function Hero({ onPrimaryAction, onSecondaryAction, onExploreFeatures }) {
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="max-w-2xl text-left">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm text-sky-100">
-            Internship tracking made clearer!
+            Internship tracking made clearer and better!
           </div>
 
           <h2 className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
