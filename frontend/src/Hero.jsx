@@ -13,7 +13,7 @@ function Hero({ onPrimaryAction, onSecondaryAction, onExploreFeatures }) {
           </div>
 
           <h2 className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            A cleaner way to log, review, and manage internship progress.
+            A clearer way to log, review, and manage internship progress.
           </h2>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
