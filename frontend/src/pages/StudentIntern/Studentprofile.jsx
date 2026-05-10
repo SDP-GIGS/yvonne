@@ -4,6 +4,7 @@ import { authAPI } from "../../api/apiService";
 import { useStudentDashboard } from "../../hooks/useData";
 
 export default function StudentProfile() {
+
   const { data: me, loading, error, refetch } = useStudentDashboard();
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -17,6 +18,7 @@ export default function StudentProfile() {
   const f = form || { first_name: me.first_name || "", last_name: me.last_name || "", email: me.email || "",programme_name: me.programme_name || "", student_number: me.student_number || ""? String(me.student_number) : "" };
 
   const handleSave = async () => {
+
     setSaving(true);
     setSaveErr("");
     try {
