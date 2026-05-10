@@ -4,6 +4,7 @@ import { authAPI } from "../../api/apiService";
 import { useStudentDashboard } from "../../hooks/useData";
 
 export default function StudentProfile() {
+
   const { data: me, loading, error, refetch } = useStudentDashboard();
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
