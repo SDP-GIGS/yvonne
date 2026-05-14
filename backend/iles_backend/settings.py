@@ -145,14 +145,14 @@ EMAIL_HOST_PASSWORD = "zvnodqmpgbsuzmev"
 CORS_ALLOWED_ORIGINS = [
     "https://insync-iles.pages.dev",
     "https://insync-iles.pages.dev",
-    "https://yvonne.tagooledavid.com",
+    "https://yvonne-api.tagooledavid.com",
     "http://localhost:5173",
     "http://127.0.0.:5173",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://insync-iles.pages.dev",
-    "https://yvonne.tagooledavid.com",
+    "https://yvonne-api.tagooledavid.com",
     "http://127.0.0.1:5173",
     "http://localhost:5173",
 ]
