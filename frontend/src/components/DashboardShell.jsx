@@ -33,6 +33,7 @@ const SidebarLink = ({ to, icon: Icon, children, end = false }) => (
   </NavLink>
 );
 
+
 const roleLinks = {
   STUDENT: [
     { to: '', label: 'Dashboard', icon: LayoutDashboard, end: true },
