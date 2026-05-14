@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { GraduationCap, ShieldCheck, Briefcase, BookOpen, ArrowRight } from "lucide-react";
 
+
 // Role → portal config. Only the user's own portal is shown when logged in.
 const PORTAL_CONFIG = {
   STUDENT: {
