@@ -8,6 +8,7 @@ def notify_students_status(sender, instance,created, **kwargs):
   if not created:
     subject= f'InSync_ILES: WeeklyLog Update -Week {instance.week_number}'
     message=f'Hello {instance.student.first_name},\n\nYour log status has been updated to:{instance.status}.'
+    
 
     send_mail(
       subject,
