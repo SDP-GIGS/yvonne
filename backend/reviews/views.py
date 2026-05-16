@@ -10,7 +10,6 @@ class WeeklyReviewViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     
     
-
     def perform_create(self, serializer):
         # Automatically set the supervisor to the logged-in user
         review = serializer.save(supervisor=self.request.user)
