@@ -11,8 +11,7 @@ class SupervisorReview(models.Model):
         related_name='review'
     )
 
-
-     
+ 
     # The supervisor performing the review
     supervisor = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
