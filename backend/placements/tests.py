@@ -21,6 +21,7 @@ class PlacementTests(APITestCase):
         }
         response = self.client.post('/api/placements/', data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        
 
     def test_admin_can_create_placement(self):
         """RBAC: An admin must be able to assign a student to a supervisor."""
