@@ -17,3 +17,8 @@ def notify_students_status(sender, instance,created, **kwargs):
       [instance.student.email],
       fail_silently=False
     )
+
+
+
+
+    
