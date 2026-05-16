@@ -10,7 +10,6 @@ class InternshipPlacementViewSet(viewsets.ModelViewSet):
     serializer_class = InternshipPlacementSerializer
     permission_classes = [IsAuthenticated]
     
-
     def get_queryset(self):
         user = self.request.user
         if user.role == 'STUDENT':
