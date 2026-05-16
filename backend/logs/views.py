@@ -16,6 +16,7 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
+        
 
         # RBAC: Students see their own logs; Supervisors see their assigned interns
         if user.role == 'STUDENT':
