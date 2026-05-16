@@ -9,6 +9,7 @@ class InternshipPlacementSerializer(serializers.ModelSerializer):
     academic_supervisor_email = serializers.ReadOnlyField(
         source='academic_supervisor.email'
     )
+    
 
     workplace_supervisor_email = serializers.ReadOnlyField(
         source='workplace_supervisor.email'
