@@ -8,7 +8,6 @@ router = DefaultRouter()
 router.register(r'reviews', WeeklyReviewViewSet)
 
 
-
 urlpatterns = [
     path('', include(router.urls)),
 ]
