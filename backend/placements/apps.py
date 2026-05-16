@@ -5,3 +5,6 @@ class PlacementsConfig(AppConfig):
     name = 'placements'
 
 
+
+
+
