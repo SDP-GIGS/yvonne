@@ -9,6 +9,7 @@ class LogAccessTest(APITestCase):
         self.student_a = CustomUser.objects.create(username="student_a", role="STUDENT")
         self.student_b = CustomUser.objects.create(username="student_b", role="STUDENT")
         # Create a log for student B
+        
 
     def test_student_cannot_see_others_logs(self):
         # Log in as Student A
