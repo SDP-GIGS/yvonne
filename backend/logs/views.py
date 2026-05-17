@@ -9,7 +9,6 @@ from rest_framework.decorators import action
 
 
 
-
 class WeeklyLogViewSet(viewsets.ModelViewSet):
     serializer_class = WeeklyLogSerializer
     permission_classes = [IsAuthenticated]
