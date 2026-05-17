@@ -17,6 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
             'id', 'email', 'first_name', 'last_name',
             'role', 'password', 'role_display', 'tokens'
         ]
+
+        
         
 
     def get_tokens(self, user):

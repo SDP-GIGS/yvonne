@@ -62,6 +62,7 @@ urlpatterns = [
     path('users/change_password/', user_change_password, name='user-change-password'),
     path('users/<int:pk>/', user_detail, name='user-detail'),
     path('users/<int:pk>/deactivate/', user_deactivate, name='user-deactivate'),
+    
 
     # Supervisor Application endpoints
     path('supervisor-applications/', supervisor_list, name='supervisor-list'),
