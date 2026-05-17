@@ -11,6 +11,7 @@ router = DefaultRouter()
 router.register(r'', WeeklyLogViewSet, basename="WeeklyLog")
 
 
+
 # 3. Define the URL patterns
 urlpatterns = [
     path('', include(router.urls)), # This includes all routes created by the router
