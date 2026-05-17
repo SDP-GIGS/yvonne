@@ -12,6 +12,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .permissions import IsInternshipAdministrator
 
 
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
