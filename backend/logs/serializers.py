@@ -6,7 +6,6 @@ class WeeklyLogSerializer(serializers.ModelSerializer):
     student_name = serializers.ReadOnlyField(source='student.get_full_name')
     student_email = serializers.ReadOnlyField(source='student.email')
     
-
     class Meta:
         model = WeeklyLog
         fields = [
