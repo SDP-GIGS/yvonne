@@ -22,6 +22,7 @@ function Features() {
   ];
 
   return (
+
     <section id="features" className="bg-slate-950 px-4 py-20 text-white sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
         <div className="max-w-2xl">
