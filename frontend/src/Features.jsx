@@ -2,25 +2,27 @@ import { ClipboardCheck, BarChart3, FileText } from "lucide-react";
 import FeatureCard from "./FeatureCard";
 
 function Features() {
+
   const features = [
-    { 
-      title: "Logging", 
+    {
+      title: "Logging",
       text: "Capture weekly activities in a structured flow that is easy to scan and review.",
-      icon: ClipboardCheck 
+      icon: ClipboardCheck
     },
-    { 
-      title: "Evaluation", 
+    {
+      title: "Evaluation",
       text: "Review progress with clear metrics for supervisors, students, and administrators.",
-      icon: BarChart3 
+      icon: BarChart3
     },
-    { 
-      title: "Reports", 
+    {
+      title: "Reports",
       text: "Turn internship data into clean summaries that support faster decisions.",
-      icon: FileText 
+      icon: FileText
     }
   ];
 
   return (
+
     <section id="features" className="bg-slate-950 px-4 py-20 text-white sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
         <div className="max-w-2xl">
@@ -32,7 +34,7 @@ function Features() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          
+
           {features.map((feature) => (
             <FeatureCard
               key={feature.title}

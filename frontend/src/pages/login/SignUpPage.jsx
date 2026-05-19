@@ -11,6 +11,7 @@ const SignUpPage = () => {
         password: '',
         role: '',
     });
+
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
 

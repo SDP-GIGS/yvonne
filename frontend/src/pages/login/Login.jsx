@@ -13,36 +13,37 @@ const LoginPage = () => {
   const justRegistered = location.state?.registered;
 
   //const handleSubmit = async (e) => {
-    //e.preventDefault();
-    //setError('');
-    //setLoading(true);
-    //const result = await loginUser(email, password);
-    //setLoading(false);
-    //if (!result.success) {
-    //  setError(result.message);
-    //}
+  //e.preventDefault();
+  //setError('');
+  //setLoading(true);
+  //const result = await loginUser(email, password);
+  //setLoading(false);
+  //if (!result.success) {
+  //  setError(result.message);
+  //}
   //};
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
 
-  try {
-    // Send 'email' as the key to match what your backend is asking for
-    await loginUser({ email: email, password: password }); 
-    
-  } catch (err) {
-    // Check if the backend sent a specific error message
-    const serverMessage = err.response?.data?.detail || 
-                         err.response?.data?.non_field_errors?.[0] || 
-                         "Invalid email or password.";
-    setError(serverMessage);
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      // Send 'email' as the key to match what your backend is asking for
+      await loginUser({ email: email, password: password });
+
+    } catch (err) {
+      // Check if the backend sent a specific error message
+      const serverMessage = err.response?.data?.detail ||
+        err.response?.data?.non_field_errors?.[0] ||
+        "Invalid email or password.";
+      setError(serverMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
+
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md bg-white rounded-xl border border-gray-100 shadow-sm p-8">
 

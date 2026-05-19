@@ -6,6 +6,7 @@ import {
 import { useStudentDashboard, useStudentLogs, useStudentPlacement } from "../../hooks/useData";
 
 export default function StudentDashboard() {
+
   const navigate = useNavigate();
   const { data: me, loading: loadMe, error: errMe } = useStudentDashboard();
   const { data: logsRaw, loading: loadLogs } = useStudentLogs();
@@ -19,10 +20,10 @@ export default function StudentDashboard() {
   const placements = Array.isArray(placementsRaw) ? placementsRaw : [];
   const myPlacement = placements[0] || null;
 
-  const approved  = logs.filter(l => l.status === 'APPROVED').length;
+  const approved = logs.filter(l => l.status === 'APPROVED').length;
   const submitted = logs.filter(l => l.status === 'SUBMITTED').length;
-  const drafts    = logs.filter(l => l.status === 'DRAFT').length;
-  const pending   = logs.filter(l => l.status === 'DRAFT').slice(0, 3);
+  const drafts = logs.filter(l => l.status === 'DRAFT').length;
+  const pending = logs.filter(l => l.status === 'DRAFT').slice(0, 3);
 
   return (
     <PW>
@@ -40,9 +41,9 @@ export default function StudentDashboard() {
       </div>
 
       <div className="flex gap-3 mb-5">
-        <StatCard label="Weeks Approved"   value={`${approved}/13`} sub="logs approved"      color="text-emerald-400" />
-        <StatCard label="Awaiting Review"  value={submitted}         sub="submitted logs"     color="text-blue-400"   />
-        <StatCard label="Pending"          value={drafts}            sub="draft / not started" color="text-amber-400"  />
+        <StatCard label="Weeks Approved" value={`${approved}/13`} sub="logs approved" color="text-emerald-400" />
+        <StatCard label="Awaiting Review" value={submitted} sub="submitted logs" color="text-blue-400" />
+        <StatCard label="Pending" value={drafts} sub="draft / not started" color="text-amber-400" />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -55,10 +56,10 @@ export default function StudentDashboard() {
           {myPlacement ? (
             <div className="grid grid-cols-2 gap-2">
               {[
-                ["Company",    myPlacement.company_name || myPlacement.company || "—"],
+                ["Company", myPlacement.company_name || myPlacement.company || "—"],
                 ["Department", myPlacement.department || "—"],
                 ["Supervisor", myPlacement.supervisor_name || "—"],
-                ["Status",     myPlacement.status || "—"],
+                ["Status", myPlacement.status || "—"],
               ].map(([k, v]) => (
                 <div key={k}><Lbl>{k}</Lbl><Val>{v}</Val></div>
               ))}
