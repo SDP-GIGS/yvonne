@@ -11,6 +11,7 @@ def notify_students_status(sender, instance,created, **kwargs):
     
     
 
+
     send_mail(
       subject,
       message,
