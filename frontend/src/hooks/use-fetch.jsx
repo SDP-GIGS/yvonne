@@ -19,6 +19,7 @@ const useFetch = (url) => {
       }
     };
 
+    
     if (url) {
       fetchData();
     }
