@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   const loginUser = async (credentials) => {
+    
     const { data } = await authAPI.login(credentials);
     setAuthTokens(data);
     const decoded = jwtDecode(data.access);

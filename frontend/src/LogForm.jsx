@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 function LogForm({ logs, setLogs, currentUser}) {
+  
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");

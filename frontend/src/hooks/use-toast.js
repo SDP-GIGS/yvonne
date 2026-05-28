@@ -72,6 +72,7 @@ export const reducer = (state, action) => {
         ),
       };
     }
+    
     case "REMOVE_TOAST":
       if (action.toastId === undefined) {
         return {
