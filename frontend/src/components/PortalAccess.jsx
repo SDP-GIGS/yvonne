@@ -35,6 +35,7 @@ const PORTAL_CONFIG = {
   },
 };
 
+
 // Public teasers — shown when NOT logged in (no links, just awareness)
 const ALL_PORTALS = Object.values(PORTAL_CONFIG);
 
