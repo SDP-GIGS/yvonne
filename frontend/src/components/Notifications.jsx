@@ -15,6 +15,7 @@ export default function Notifications() {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   // Mark notification as read
+  
   const markAsRead = async (notificationId) => {
     await fetch(`http://localhost:8000/api/notifications/${notificationId}`, {
       method: "PUT",
