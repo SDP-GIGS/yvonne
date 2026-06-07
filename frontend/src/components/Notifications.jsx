@@ -87,3 +87,4 @@ export default function Notifications() {
     </div>
   );
 }
+// Note: This component assumes the backend API endpoints for fetching and updating notifications are set up as described. Adjust the API URLs and data structure as needed to fit your backend implementation.
