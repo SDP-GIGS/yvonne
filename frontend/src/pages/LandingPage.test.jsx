@@ -1,18 +1,23 @@
-import { render } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { test, expect } from "vitest";
-
 import LandingPage from "./LandingPage";
-import { AuthProvider } from "../context/AuthContext";
 
-test("landing page renders without crashing", () => {
-  const { container } = render(
-    <MemoryRouter>
-      <AuthProvider>
+vi.mock("../context/AuthContext", () => ({
+  useAuth: () => ({ user: null }),
+}));
+
+describe("LandingPage", () => {
+  const renderLandingPage = () =>
+    render(
+      <MemoryRouter>
         <LandingPage />
-      </AuthProvider>
-    </MemoryRouter>
-  );
-
-  expect(container).toBeTruthy();
+      </MemoryRouter>
+    );
+it("displays feature tags", () => {
+  renderLandingPage();
+  expect(screen.getByText("Weekly logs", { exact: true })).toBeInTheDocument();
+  expect(screen.getByText("Supervisor review", { exact: true })).toBeInTheDocument();
+  expect(screen.getByText("Progress reporting", { exact: true })).toBeInTheDocument();
+});
 });

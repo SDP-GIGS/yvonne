@@ -1,23 +1,23 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import WorkplaceSupervisorDashboard from "./WorkplaceSupervisorDashboard";
+import AcademicSupervisorDashboard from "./AcaDashboard";
 
 vi.mock("../../context/AuthContext", () => ({
   useAuth: () => ({
     user: {
-      id: 3,
-      name: "Alex Supervisor",
-      role: "WORK_SUPERVISOR",
+      id: 4,
+      name: "Dr. Peter",
+      role: "ACADEMIC_SUPERVISOR",
     },
   }),
 }));
 
-describe("WorkplaceSupervisorDashboard", () => {
+describe("AcademicSupervisorDashboard", () => {
   const renderDashboard = () =>
     render(
       <MemoryRouter>
-        <WorkplaceSupervisorDashboard />
+        <AcademicSupervisorDashboard />
       </MemoryRouter>
     );
 
@@ -25,10 +25,10 @@ describe("WorkplaceSupervisorDashboard", () => {
     renderDashboard();
   });
 
-  it("displays supervisor dashboard heading", () => {
+  it("displays academic supervisor heading", () => {
     renderDashboard();
     expect(
-      screen.getByRole("heading", { name: /supervisor/i })
+      screen.getByRole("heading", { name: /academic supervisor/i })
     ).toBeInTheDocument();
   });
 

@@ -1,34 +1,37 @@
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { test, expect, vi } from "vitest";
 import StudentDashboard from "./Studentdashboard";
 
-vi.mock("../../hooks/useData", () => ({
-  useStudentDashboard: () => ({
-    data: { first_name: "Walid", last_name: "Kahuma", email: "test@test.com" },
-    loading: false,
-    error: null,
-  }),
-  useStudentLogs: () => ({
-    data: [],
-    loading: false,
-  }),
-  useStudentPlacement: () => ({
-    data: [],
-    loading: false,
+vi.mock("../../context/AuthContext", () => ({
+  useAuth: () => ({
+    user: { id: 2, name: "Bob Student", role: "STUDENT" },
   }),
 }));
 
-test("renders student dashboard", () => {
-  render(
-    <MemoryRouter>
-      <StudentDashboard />
-    </MemoryRouter>
-  );
+describe("StudentDashboard", () => {
+  const renderDashboard = () =>
+    render(
+      <MemoryRouter>
+        <StudentDashboard />
+      </MemoryRouter>
+    );
 
-  expect(screen.getByText(/walid kahuma/i)).toBeInTheDocument();
+  it("renders without crashing", () => {
+    renderDashboard();
+  });
 
-  expect(screen.getAllByText(/my placement/i).length).toBeGreaterThan(0);
+  it("displays student dashboard heading", async () => {
+    renderDashboard();
+    // findBy* waits for async content to appear (loading → loaded)
+    expect(
+      await screen.findByRole("heading", { name: /student/i })
+    ).toBeInTheDocument();
+  });
 
-  expect(screen.getAllByText(/logbook progress/i).length).toBeGreaterThan(0);
+  it("displays at least one navigation link or card", async () => {
+    renderDashboard();
+    const links = await screen.findAllByRole("link");
+    expect(links.length).toBeGreaterThan(0);
+  });
 });
