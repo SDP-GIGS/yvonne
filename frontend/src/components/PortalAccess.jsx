@@ -4,6 +4,9 @@ import { GraduationCap, ShieldCheck, Briefcase, BookOpen, ArrowRight } from "luc
 
 
 // Role → portal config. Only the user's own portal is shown when logged in.
+// Each portal config includes:
+// - icon: Lucide icon component
+// - label: Display name of the portal
 const PORTAL_CONFIG = {
   STUDENT: {
     icon: GraduationCap,
