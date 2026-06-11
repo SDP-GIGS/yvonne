@@ -1,6 +1,5 @@
 from django.test import TestCase
 from .models import AcademicEvaluation
-from placements.models import InternshipPlacement
 from users.models import CustomUser
 
 class EvaluationLogicTest(TestCase):
