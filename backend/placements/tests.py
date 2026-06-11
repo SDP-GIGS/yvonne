@@ -1,8 +1,6 @@
-from django.test import TestCase
 from rest_framework.test import APITestCase
 from rest_framework import status
 from users.models import CustomUser
-from .models import InternshipPlacement
 
 
 class PlacementTests(APITestCase):
