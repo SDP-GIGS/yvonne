@@ -28,7 +28,7 @@ def notify_students_status(sender,instance,created,**kwargs):
       message,
       'noreply@insync-iles.com',
       [instance.student.email],
-      fail_silently=False
+      fail_silently=True
     )
 
 

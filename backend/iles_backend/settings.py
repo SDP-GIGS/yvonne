@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 import dj_database_url
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-yyo45o@2lk7@32q(n$3@l&w3+irpit-91rbu_((x6ped9%623+"
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     "users",
     "evaluations",
     "djoser",
+    "notifications.apps.NotificationsConfig",
 ]
 
 MIDDLEWARE = [
@@ -144,6 +146,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD =os.getenv("EMAIL_HOST_PASSWORD")
+
 
 CORS_ALLOWED_ORIGINS = [
     "https://insync-iles.pages.dev",
