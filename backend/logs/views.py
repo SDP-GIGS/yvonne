@@ -66,14 +66,47 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
         instance.delete()
 
 
-    @action(detail= True , methods=['post'])
-    def approve_log_view(self, request, pk=None):
-        log=self.get_object()
+    @action(
+    detail=True,
+    methods=['post'],
+    url_path='approve'
+)
+    def approve_log(self, request, pk=None):
 
-        log.status= "Approved"
+        log = self.get_object()
+        user = request.user
+
+        # Only workplace supervisor can approve
+        if user.role != "WORK_SUPERVISOR":
+            return Response(
+                {
+                    "error": "Only workplace supervisors can approve logs"
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+
+        # Check assigned supervisor
+        if log.placement_supervisor != user:
+            return Response(
+                {
+                    "error": "You are not assigned to this student"
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+
+        log.status = WeeklyLog.Status.APPROVED
         log.save()
 
-        return Response({'status': 'log approved and student notified'}, status=status.HTTP_200_OK)
+
+        return Response(
+            {
+                "message":"Log approved successfully",
+                "status":log.status
+            },
+            status=status.HTTP_200_OK
+        )
 
 
 
