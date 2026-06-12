@@ -56,6 +56,7 @@ export const supervisorAPI = {
   getStudents:      ()                  => api.get('/api/users/users/'),
   getReviewQueue:   ()                  => api.get('/api/logs/'),
   getLog:           (id)                => api.get(`/api/logs/${id}/`),
+  approveLog:       (id)            => api.post(`/api/logs/${logId}/approve/`),
   reviewLog:        (logId, reviewData) => api.post('/api/reviews/reviews/', { log: logId, ...reviewData }),
   submitEvaluation: (data)              => api.post('/api/evaluations/academic-evals', data),
   getStudent:       (id)                => api.get(`/api/users/users/${id}/`),
