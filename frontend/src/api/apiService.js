@@ -78,3 +78,21 @@ export const adminAPI = {
 };
 
 export default api;
+
+// --------notificactions------
+export const notificationAPI = {
+
+getNotifications:
+()=>api.get('/api/notifications/'),
+
+
+markRead:
+(id)=>
+api.patch(
+`/api/notifications/${id}/`,
+{
+is_read:true
+}
+)
+
+}
