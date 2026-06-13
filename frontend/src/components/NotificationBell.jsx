@@ -1,5 +1,5 @@
 import {useEffect,useState} from "react";
-import {notificationAPI} from "../apiService";
+import {notificationAPI} from "../api/apiService";
 
 
 export default function NotificationBell(){
