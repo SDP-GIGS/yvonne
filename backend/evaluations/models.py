@@ -23,6 +23,6 @@ class AcademicEvaluation(models.Model):
         return (self.organization_score * 0.4) + (self.logbook_score * 0.3) + (self.final_report_score * 0.3)
 
     def __str__(self):
-        return f"Evaluation for {self.placement.student.username}"
+        return f"Evaluation for {self.placement.student.email}"
 
 # Create your models here.
