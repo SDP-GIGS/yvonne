@@ -15,3 +15,7 @@ router.register(r'', WeeklyLogViewSet, basename="WeeklyLog")
 urlpatterns = [
     path('', include(router.urls)), # This includes all routes created by the router
 ]
+
+
+
+

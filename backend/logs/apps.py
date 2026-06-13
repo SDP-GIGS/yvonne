@@ -9,9 +9,3 @@ class LogsConfig(AppConfig):
       import logs.signals
 
 
-
-
-
-
-
-
