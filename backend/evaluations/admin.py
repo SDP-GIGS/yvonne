@@ -7,3 +7,8 @@ admin.site.register(AcademicEvaluation)
 
 
 
+
+
+
+
+

@@ -26,3 +26,8 @@ class AcademicEvaluation(models.Model):
         return f"Evaluation for {self.placement.student.username}"
 
 # Create your models here.
+
+
+
+
+
