@@ -47,7 +47,7 @@ export const studentAPI = {
   updateLog:      (id, data) => api.patch(`/api/logs/${id}/`, data),
   deleteLog:      (id)       => api.delete(`/api/logs/${id}/`),
   getPlacements:  ()         => api.get('/api/placements/placements/'),
-  getEvaluations: ()         => api.get('/api/evaluations/'),
+  getEvaluations: ()         => api.get('/api/evaluations/academic-evals/'),
 };
 
 // ── Supervisor (Workplace + Academic) ─────────────────────────────────────────
@@ -55,6 +55,7 @@ export const supervisorAPI = {
   getDashboard:     ()                  => api.get('/api/users/users/me/'),
   getStudents:      ()                  => api.get('/api/users/users/'),
   getReviewQueue:   ()                  => api.get('/api/logs/'),
+  getEvaluations:   ()                  => api.get('/api/evaluations/academic-evals/'),
   getLog:           (id)                => api.get(`/api/logs/${id}/`),
   approveLog:       (id)            => api.post(`/api/logs/${logId}/approve/`),
   reviewLog:        (logId, reviewData) => api.post('/api/reviews/reviews/', { log: logId, ...reviewData }),

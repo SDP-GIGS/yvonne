@@ -69,7 +69,7 @@ export const useWPStudents = () => useFetchData(supervisorAPI.getStudents);
 export const useAcaStudents = () => useFetchData(supervisorAPI.getStudents);
 
 // Returns evaluations
-export const useAcaEvaluations = () => useFetchData(studentAPI.getEvaluations);
+export const useAcaEvaluations = () => useFetchData(supervisorAPI.getEvaluations);
 
 // ── Aliases and placeholders ──────────────────────────────────────────────────
 export const useWPDashboard = useWorkplaceDashboard;
