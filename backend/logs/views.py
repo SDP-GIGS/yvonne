@@ -112,3 +112,13 @@ class WeeklyLogViewSet(viewsets.ModelViewSet):
 
         
 
+
+
+
+
+
+
+
+
+
+

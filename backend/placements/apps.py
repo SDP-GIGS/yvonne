@@ -8,3 +8,16 @@ class PlacementsConfig(AppConfig):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+

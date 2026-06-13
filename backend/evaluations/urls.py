@@ -8,3 +8,10 @@ router.register(r'academic-evals', EvaluationViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
+
+
+
+
+
+
+
