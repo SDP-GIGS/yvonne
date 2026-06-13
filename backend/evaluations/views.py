@@ -18,3 +18,11 @@ class EvaluationViewSet(viewsets.ModelViewSet):
         serializer.save(supervisor=self.request.user)
 
 # Create your views here.
+
+
+
+
+
+
+
+
