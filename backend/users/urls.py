@@ -69,3 +69,6 @@ urlpatterns = [
     path('supervisor-applications/<int:pk>/approve/', supervisor_approve, name='supervisor-approve'),
     path('supervisor-applications/<int:pk>/reject/', supervisor_reject, name='supervisor-reject'),
 ]
+
+
+
