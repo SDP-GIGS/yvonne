@@ -71,6 +71,29 @@ export default function StudentPlacement() {
               <div><Lbl>Company</Lbl><Val>{p.company_name || '—'}</Val></div>
               <div><Lbl>Department</Lbl><Val>{p.department || '—'}</Val></div>
               <div><Lbl>Status</Lbl><Val>{p.status || '—'}</Val></div>
+              <div className="mt-4 pt-3 border-t border-slate-800">
+  <div className="text-xs text-slate-400 font-semibold mb-2">Supervisors</div>
+
+  <div className="space-y-2">
+    <div>
+      <Lbl>Workplace Supervisor</Lbl>
+      <Val>
+         {p.workplace_supervisor_details
+           ? `${p.workplace_supervisor_details.first_name || ''} ${p.workplace_supervisor_details.last_name || ''} (${p.workplace_supervisor_details.email})`
+          : '—'}
+      </Val>
+    </div>
+
+    <div>
+      <Lbl>Academic Supervisor</Lbl>
+      <Val>
+        {p.academic_supervisor_details
+          ? `${p.academic_supervisor_details.first_name || ''} ${p.academic_supervisor_details.last_name || ''} (${p.academic_supervisor_details.email})`
+          : '—'}
+      </Val>
+    </div>
+  </div>
+</div>
             </div>
           </Card>
           <Card cls="bg-[#0D1A28]">
