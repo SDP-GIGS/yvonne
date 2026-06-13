@@ -86,7 +86,10 @@ export default function DashboardShell({ role }) {
   const links = roleLinks[role] || [];
   const navigate = useNavigate();
 
-  const { data, loading, error } = (roleHooks[role] || (() => ({ data: null, loading: false })))();
+const roleHook = roleHooks[role];
+const { data, loading, error } = roleHook
+  ? roleHook()
+  : { data: null, loading: false, error: null };
 
   const handleLogout = () => {
     logoutUser();
@@ -171,9 +174,11 @@ export default function DashboardShell({ role }) {
 <main className="flex-1 min-w-0 overflow-auto">
 
   {/* Top bar for authenticated users */}
+{user && (
   <div className="flex justify-end items-center p-4 border-b border-slate-800">
     <NotificationBell />
   </div>
+)}
 
   <div className="p-4 lg:p-8 w-full max-w-full overflow-x-hidden">
     {loading ? (
