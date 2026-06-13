@@ -10,3 +10,6 @@ class NotificationListView(generics.ListAPIView):
         return Notification.objects.filter(
             user=self.request.user
         ).order_by('-created_at')
+    
+
+    
