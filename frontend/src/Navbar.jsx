@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
-import NotificationBell from "./components/NotificationBell";
+
 
 // FIX: JWT encodes roles as UPPERCASE — was using lowercase which never matched
 const ROLE_ROUTES = {
@@ -77,7 +77,7 @@ function Navbar() {
             </Link>
 
             
-            <NotificationBell />
+
 
             <button
               onClick={logoutUser}
