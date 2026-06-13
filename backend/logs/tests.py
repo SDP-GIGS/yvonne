@@ -4,7 +4,8 @@ from users.models import CustomUser
 
 class LogAccessTest(APITestCase):
     def setUp(self):
-        self.student_a = CustomUser.objects.create(username="student_a", role="STUDENT")
+       # self.student_a = CustomUser.objects.create(username="student_a", role="STUDENT")
+        self.user = CustomUser.objects.create_user(email="supervisor@test.com", password="testpassword123", role="SUPERVISOR")
         self.student_b = CustomUser.objects.create(username="student_b", role="STUDENT")
         # Create a log for student B
         

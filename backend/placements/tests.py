@@ -5,7 +5,8 @@ from users.models import CustomUser
 
 class PlacementTests(APITestCase):
     def setUp(self):
-        self.admin = CustomUser.objects.create_superuser(username="admin", password="password123", role="ADMIN")
+        #self.admin = CustomUser.objects.create_superuser(username="admin", password="password123", role="ADMIN")
+        self.admin = CustomUser.objects.create_superuser(email="admin@test.com", password="password123", role="ADMIN")
         self.student = CustomUser.objects.create_user(username="student1", password="password123", role="STUDENT")
         self.supervisor = CustomUser.objects.create_user(username="supervisor1", password="password123", role="SUPERVISOR")
 

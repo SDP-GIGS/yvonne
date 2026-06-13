@@ -5,7 +5,7 @@ from users.models import CustomUser
 class EvaluationLogicTest(TestCase):
     def setUp(self):
         # Create a sample user and placement for the test
-        self.user = CustomUser.objects.create(username="test_supervisor", role="SUPERVISOR")
+        self.user = CustomUser.objects.create_user(email="supervisor@test.com", password="testpassword123", role="SUPERVISOR")
         # Assume placement is created here...
 
     def test_weighted_score_calculation(self):
