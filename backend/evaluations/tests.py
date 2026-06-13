@@ -13,7 +13,8 @@ class EvaluationLogicTest(TestCase):
             organization_score=80, # 40% = 32
             logbook_score=70,      # 30% = 21
             final_report_score=90, # 30% = 27
-            supervisor=self.user
+            supervisor=self.user,
+            placement=self.placement,
         )
         # 32 + 21 + 27 = 80
         self.assertEqual(eval.calculate_final_grade, 80.0)

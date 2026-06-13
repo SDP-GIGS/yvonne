@@ -9,8 +9,10 @@ class ReviewTests(APITestCase):
     def setUp(self):
         #self.supervisor = CustomUser.objects.create_user(username="sup", role="SUPERVISOR")
         self.supervisor = CustomUser.objects.create_user(email="sup@test.com", password="testpassword123", role="SUPERVISOR")
-        self.wrong_supervisor = CustomUser.objects.create_user(username="wrong_sup", role="SUPERVISOR")
-        self.student = CustomUser.objects.create_user(username="std", role="STUDENT")
+        #self.wrong_supervisor = CustomUser.objects.create_user(username="wrong_sup", role="SUPERVISOR")
+        #self.student = CustomUser.objects.create_user(username="std", role="STUDENT")
+        self.wrong_supervisor = CustomUser.objects.create_user(email="wrong_sup@test.com", password="password123", role="SUPERVISOR")
+        self.student = CustomUser.objects.create_user(email="std@test.com", password="password123", role="STUDENT")
         
         self.placement = InternshipPlacement.objects.create(
             student=self.student, supervisor=self.supervisor, company_name="Tech Solutions"

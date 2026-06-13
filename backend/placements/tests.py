@@ -7,9 +7,19 @@ class PlacementTests(APITestCase):
     def setUp(self):
         #self.admin = CustomUser.objects.create_superuser(username="admin", password="password123", role="ADMIN")
         self.admin = CustomUser.objects.create_superuser(email="admin@test.com", password="password123", role="ADMIN")
-        self.student = CustomUser.objects.create_user(username="student1", password="password123", role="STUDENT")
-        self.supervisor = CustomUser.objects.create_user(username="supervisor1", password="password123", role="SUPERVISOR")
-
+        #self.student = CustomUser.objects.create_user(username="student1", password="password123", role="STUDENT")
+        #self.supervisor = CustomUser.objects.create_user(username="supervisor1", password="password123", role="SUPERVISOR")
+        self.student = CustomUser.objects.create_user(
+            email="student1@test.com", 
+            password="password123", 
+            role="STUDENT"
+        )
+        self.supervisor = CustomUser.objects.create_user(
+            email="supervisor1@test.com", 
+            password="password123", 
+            role="SUPERVISOR"
+        )
+        
     def test_student_cannot_create_placement(self):
         """RBAC: A student should not be able to create their own placement."""
         self.client.force_authenticate(user=self.student)
