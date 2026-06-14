@@ -3,6 +3,7 @@ from rest_framework import status
 from users.models import CustomUser
 from logs.models import WeeklyLog
 from placements.models import InternshipPlacement
+from datetime import date
 
 
 class ReviewTests(APITestCase):
@@ -15,7 +16,7 @@ class ReviewTests(APITestCase):
         self.student = CustomUser.objects.create_user(email="std@test.com", password="password123", role="STUDENT")
         
         self.placement = InternshipPlacement.objects.create(
-            student=self.student, academic_supervisor=self.supervisor, company_name="Tech Solutions"
+            student=self.student, academic_supervisor=self.supervisor, company_name="Tech Solutions" , start_date=date.today(),
         )
         self.log = WeeklyLog.objects.create(student=self.student, content="Completed Phase 1")
 
