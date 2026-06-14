@@ -15,7 +15,7 @@ class ReviewTests(APITestCase):
         self.student = CustomUser.objects.create_user(email="std@test.com", password="password123", role="STUDENT")
         
         self.placement = InternshipPlacement.objects.create(
-            student=self.student, supervisor=self.supervisor, company_name="Tech Solutions"
+            student=self.student, academic_supervisor=self.supervisor, company_name="Tech Solutions"
         )
         self.log = WeeklyLog.objects.create(student=self.student, content="Completed Phase 1")
 
