@@ -8,7 +8,12 @@ class EvaluationLogicTest(TestCase):
         # Create a sample user and placement for the test
         self.user = CustomUser.objects.create_user(email="supervisor@test.com", password="testpassword123", role="SUPERVISOR")
         # Assume placement is created here...
-    
+        self.student = CustomUser.objects.create_user(
+    username='eval_student', 
+    email='eval_student@example.com', 
+    password='password123', 
+    role='student'
+)
     
     # Create your student, supervisors, etc. first
         self.placement = InternshipPlacement.objects.create(
