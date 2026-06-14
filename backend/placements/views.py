@@ -23,3 +23,5 @@ class InternshipPlacementViewSet(viewsets.ModelViewSet):
             )
         # Admins see everything
         return InternshipPlacement.objects.all()
+    
+    
