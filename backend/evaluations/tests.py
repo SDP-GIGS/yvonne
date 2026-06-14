@@ -1,12 +1,21 @@
 from django.test import TestCase
 from .models import AcademicEvaluation
 from users.models import CustomUser
+from placements.models import InternshipPlacement
 
 class EvaluationLogicTest(TestCase):
     def setUp(self):
         # Create a sample user and placement for the test
         self.user = CustomUser.objects.create_user(email="supervisor@test.com", password="testpassword123", role="SUPERVISOR")
         # Assume placement is created here...
+    
+    
+    # Create your student, supervisors, etc. first
+        self.placement = InternshipPlacement.objects.create(
+        student=self.student,
+        # ... other required fields ...
+    )
+
 
     def test_weighted_score_calculation(self):
         eval = AcademicEvaluation.objects.create(
