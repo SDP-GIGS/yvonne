@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 from users.models import CustomUser
-
+from django.urls import reverse
 
 class PlacementTests(APITestCase):
     def setUp(self):
@@ -28,6 +28,7 @@ class PlacementTests(APITestCase):
             "supervisor": self.supervisor.id,
             "company_name": "Makerere University IT Dept"
         }
+        url = reverse('internshipplacement-list')
         response = self.client.post('/api/placements/', data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         
@@ -40,6 +41,7 @@ class PlacementTests(APITestCase):
             "supervisor": self.supervisor.id,
             "company_name": "Makerere University IT Dept"
         }
+        url = reverse('internshipplacement-list')
         response = self.client.post('/api/placements/', data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
